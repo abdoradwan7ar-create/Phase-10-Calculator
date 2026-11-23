@@ -6,7 +6,7 @@
 <link rel="icon" type="image/png" href="./phase10-icon-512.png">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#123b35">
-<title>Phase 10 | حاسبة النتائج</title>
+<title>Phase 10 | Ø­Ø§Ø³Ø¨Ø© Ø§Ù„Ù†ØªØ§Ø¦Ø¬</title>
 <style>
 :root{--bg:#f3f6f5;--card:#fff;--ink:#172b27;--muted:#70817c;--green:#176b50;--green2:#e6f4ed;--line:#e2eae6;--red:#b64040;--gold:#b8860b}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif}
@@ -43,52 +43,52 @@ details summary{cursor:pointer;font-weight:700;font-size:14px}
 </head>
 <body>
 <main>
-<header><h1>PHASE 10</h1><p>حاسبة المراحل والنتائج</p></header>
+<header><h1>PHASE 10</h1><p>Ø­Ø§Ø³Ø¨Ø© Ø§Ù„Ù…Ø±Ø§Ø­Ù„ ÙˆØ§Ù„Ù†ØªØ§Ø¦Ø¬</p></header>
 
 <section class="card" id="setup">
-<h2>إعداد اللعبة</h2>
-<p class="sub">أدخل أسماء من لاعبين إلى 8 لاعبين. يبدأ الجميع من المرحلة الأولى.</p>
+<h2>Ø¥Ø¹Ø¯Ø§Ø¯ Ø§Ù„Ù„Ø¹Ø¨Ø©</h2>
+<p class="sub">Ø£Ø¯Ø®Ù„ Ø£Ø³Ù…Ø§Ø¡ Ù…Ù† Ù„Ø§Ø¹Ø¨ÙŠÙ† Ø¥Ù„Ù‰ 8 Ù„Ø§Ø¹Ø¨ÙŠÙ†. ÙŠØ¨Ø¯Ø£ Ø§Ù„Ø¬Ù…ÙŠØ¹ Ù…Ù† Ø§Ù„Ù…Ø±Ø­Ù„Ø© Ø§Ù„Ø£ÙˆÙ„Ù‰.</p>
 <div class="players" id="nameFields"></div>
 <div class="row" style="margin-top:12px">
-<button class="light" id="addPlayer">＋ إضافة لاعب</button>
-<button id="startGame">بدء لعبة جديدة</button>
+<button class="light" id="addPlayer">ï¼‹ Ø¥Ø¶Ø§ÙØ© Ù„Ø§Ø¹Ø¨</button>
+<button id="startGame">Ø¨Ø¯Ø¡ Ù„Ø¹Ø¨Ø© Ø¬Ø¯ÙŠØ¯Ø©</button>
 </div>
 </section>
 
 <section class="card hidden" id="game">
 <div class="row between">
-<h2 style="margin:0">تسجيل الجولة</h2>
-<span class="pill" id="roundNo">الجولة 1</span>
+<h2 style="margin:0">ØªØ³Ø¬ÙŠÙ„ Ø§Ù„Ø¬ÙˆÙ„Ø©</h2>
+<span class="pill" id="roundNo">Ø§Ù„Ø¬ÙˆÙ„Ø© 1</span>
 </div>
-<p class="sub">أدخل مجموع نقاط الكروت المتبقية لكل لاعب في هذه الجولة، ثم اعتمد النتيجة.</p>
+<p class="sub">Ø£Ø¯Ø®Ù„ Ù…Ø¬Ù…ÙˆØ¹ Ù†Ù‚Ø§Ø· Ø§Ù„ÙƒØ±ÙˆØª Ø§Ù„Ù…ØªØ¨Ù‚ÙŠØ© Ù„ÙƒÙ„ Ù„Ø§Ø¹Ø¨ ÙÙŠ Ù‡Ø°Ù‡ Ø§Ù„Ø¬ÙˆÙ„Ø©ØŒ Ø«Ù… Ø§Ø¹ØªÙ…Ø¯ Ø§Ù„Ù†ØªÙŠØ¬Ø©.</p>
 <div class="scroll">
-<table><thead><tr><th>اللاعب</th><th>يلعب في</th><th>نقاط الجولة</th></tr></thead><tbody id="scoreInputs"></tbody></table>
+<table><thead><tr><th>Ø§Ù„Ù„Ø§Ø¹Ø¨</th><th>ÙŠÙ„Ø¹Ø¨ ÙÙŠ</th><th>Ù†Ù‚Ø§Ø· Ø§Ù„Ø¬ÙˆÙ„Ø©</th></tr></thead><tbody id="scoreInputs"></tbody></table>
 </div>
 <div class="row" style="margin-top:13px">
-<button id="saveRound">اعتماد الجولة</button>
-<button class="light" id="undo" disabled>تراجع</button>
+<button id="saveRound">Ø§Ø¹ØªÙ…Ø§Ø¯ Ø§Ù„Ø¬ÙˆÙ„Ø©</button>
+<button class="light" id="undo" disabled>ØªØ±Ø§Ø¬Ø¹</button>
 </div>
-<p class="sub" style="margin:12px 0 0">أقل من 50 نقطة: يتقدم مرحلة واحدة. 50 نقطة أو أكثر: يبقى في مرحلته. عند الوصول إلى Phase 10 يظل اللاعب فيها.</p>
+<p class="sub" style="margin:12px 0 0">Ø£Ù‚Ù„ Ù…Ù† 50 Ù†Ù‚Ø·Ø©: ÙŠØªÙ‚Ø¯Ù… Ù…Ø±Ø­Ù„Ø© ÙˆØ§Ø­Ø¯Ø©. 50 Ù†Ù‚Ø·Ø© Ø£Ùˆ Ø£ÙƒØ«Ø±: ÙŠØ¨Ù‚Ù‰ ÙÙŠ Ù…Ø±Ø­Ù„ØªÙ‡. Ø¹Ù†Ø¯ Ø§Ù„ÙˆØµÙˆÙ„ Ø¥Ù„Ù‰ Phase 10 ÙŠØ¸Ù„ Ø§Ù„Ù„Ø§Ø¹Ø¨ ÙÙŠÙ‡Ø§.</p>
 </section>
 
 <section class="card hidden" id="standings">
-<div class="row between"><h2 style="margin:0">ترتيب اللاعبين</h2><span class="pill" id="roundCount">0 جولة مكتملة</span></div>
+<div class="row between"><h2 style="margin:0">ØªØ±ØªÙŠØ¨ Ø§Ù„Ù„Ø§Ø¹Ø¨ÙŠÙ†</h2><span class="pill" id="roundCount">0 Ø¬ÙˆÙ„Ø© Ù…ÙƒØªÙ…Ù„Ø©</span></div>
 <div class="player-grid" id="playerCards" style="margin-top:12px"></div>
 <div id="winner"></div>
 </section>
 
 <section class="card hidden" id="historySection">
-<div class="row between"><h2 style="margin:0">سجل الجولات</h2><button class="red" id="newGame">إنهاء / لعبة جديدة</button></div>
+<div class="row between"><h2 style="margin:0">Ø³Ø¬Ù„ Ø§Ù„Ø¬ÙˆÙ„Ø§Øª</h2><button class="red" id="newGame">Ø¥Ù†Ù‡Ø§Ø¡ / Ù„Ø¹Ø¨Ø© Ø¬Ø¯ÙŠØ¯Ø©</button></div>
 <div id="historyList"></div>
 </section>
-<div class="footer">تُحفظ النتائج تلقائياً على هذا الجهاز وفي هذا المتصفح.</div>
+<div class="footer">ØªÙØ­ÙØ¸ Ø§Ù„Ù†ØªØ§Ø¦Ø¬ ØªÙ„Ù‚Ø§Ø¦ÙŠØ§Ù‹ Ø¹Ù„Ù‰ Ù‡Ø°Ø§ Ø§Ù„Ø¬Ù‡Ø§Ø² ÙˆÙÙŠ Ù‡Ø°Ø§ Ø§Ù„Ù…ØªØµÙØ­.</div>
 </main>
 <script>
 const $=id=>document.getElementById(id);
 const KEY='phase10_mobile_app_v1';
 let state={names:['','','','',''],players:[],rounds:[],active:false};
 function clone(x){return JSON.parse(JSON.stringify(x))}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){alert('تعذر حفظ البيانات في المتصفح.')} }
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){alert('ØªØ¹Ø°Ø± Ø­ÙØ¸ Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª ÙÙŠ Ø§Ù„Ù…ØªØµÙØ­.')} }
 function load(){try{const x=JSON.parse(localStorage.getItem(KEY));if(x&&Array.isArray(x.names))state=x}catch(e){}}
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function renderNames(){
@@ -96,7 +96,7 @@ function renderNames(){
  const n=Math.max(2,Math.min(8,state.names.length));
  for(let i=0;i<n;i++){
   const d=document.createElement('div');d.className='player-input';
-  d.innerHTML=`<label>اسم اللاعب ${i+1}</label><input maxlength="24" placeholder="اسم اللاعب" value="${esc(state.names[i]||'')}" data-name="${i}">`;
+  d.innerHTML=`<label>Ø§Ø³Ù… Ø§Ù„Ù„Ø§Ø¹Ø¨ ${i+1}</label><input maxlength="24" placeholder="Ø§Ø³Ù… Ø§Ù„Ù„Ø§Ø¹Ø¨" value="${esc(state.names[i]||'')}" data-name="${i}">`;
   box.append(d);
  }
  $('addPlayer').disabled=n>=8;
@@ -110,12 +110,14 @@ function render(){
  $('historySection').classList.toggle('hidden',!state.active);
  if(!state.active)return;
  const round=state.rounds.length+1;
- $('roundNo').textContent='الجولة '+round;
- $('roundCount').textContent=state.rounds.length+' جولة مكتملة';
+ $('roundNo').textContent='Ø§Ù„Ø¬ÙˆÙ„Ø© '+round;
+ $('roundCount').textContent=state.rounds.length+' Ø¬ÙˆÙ„Ø© Ù…ÙƒØªÙ…Ù„Ø©';
  $('scoreInputs').innerHTML=state.players.map(p=>`<tr><td><b>${esc(p.name)}</b></td><td class="phase">Phase ${p.phase}</td><td><input class="points" type="number" min="0" step="1" inputmode="numeric" placeholder="0" data-score="${p.id}"></td></tr>`).join('');
  $('undo').disabled=!state.rounds.length;
- const ranked=totals().sort((a,b)=>b.phase-a.phase||a.total-b.total||a.name.localeCompare(b.name));
- const rankNames=['����� ??','������ ??','������ ??','������','������','������','������','������'];
+
+const ranked=totals().sort((a,b)=>b.phase-a.phase||a.total-b.total||a.name.localeCompare(b.name));
+
+const rankNames=['الأول 🥇','الثاني 🥈','الثالث 🥉','الرابع','الخامس','السادس','السابع','الثامن'];
 
 $('playerCards').innerHTML=ranked.map((p,i)=>`
 <div class="player-card">
@@ -124,25 +126,27 @@ $('playerCards').innerHTML=ranked.map((p,i)=>`
     <span class="pill">${rankNames[i]}</span>
   </div>
   <div class="big">Phase ${p.phase}</div>
-  <div class="small">������ ������: <b>${p.total}</b></div>
-  <div class="small">���� ��� ����: ${p.last}</div>
-</div>`).join('');)}</span><span class="pill">#${i+1}</span></div><div class="big">Phase ${p.phase}</div><div class="small">إجمالي النقاط: <b>${p.total}</b></div><div class="small">نقاط آخر جولة: ${p.last}</div></div>`).join('');
- const best=ranked[0], tied=ranked.filter(p=>p.phase===best.phase&&p.total===best.total);
- $('winner').innerHTML=`<div class="winner">🏆 <strong>${state.rounds.length?'المتصدر حالياً':'الترتيب الحالي'}: ${tied.map(p=>esc(p.name)).join(' و ')}</strong><div style="font-size:12px;margin-top:4px">Phase ${best.phase} · ${best.total} نقطة إجمالية${tied.length>1?' · تعادل':''}</div><div class="sub" style="margin:6px 0 0">الأولوية لأعلى مرحلة، وعند تساوي المرحلة يفوز الأقل في مجموع النقاط.</div></div>`;
- $('historyList').innerHTML=state.rounds.length?state.rounds.map((r,idx)=>`<details class="history-round"><summary>الجولة ${idx+1}</summary><div class="scroll"><table><thead><tr><th>اللاعب</th><th>المرحلة قبل</th><th>النقاط</th><th>النتيجة</th><th>المرحلة بعد</th></tr></thead><tbody>${state.players.map(p=>{const x=r.results[p.id];return `<tr><td>${esc(p.name)}</td><td>Phase ${x.before}</td><td>${x.score}</td><td><span class="pill ${x.advanced?'ok':'stay'}">${x.advanced?'تقدم':'باقٍ'}</span></td><td class="phase">Phase ${x.after}</td></tr>`}).join('')}</tbody></table></div></details>`).join(''):'<div class="empty">لم يتم تسجيل أي جولة بعد.</div>';
+  <div class="small">إجمالي النقاط: <b>${p.total}</b></div>
+  <div class="small">نقاط آخر جولة: ${p.last}</div>
+</div>`).join('');
+
+const best=ranked[0], tied=ranked.filter(p=>p.phase===best.phase&&p.total===best.total);
+
+ $('winner').innerHTML=`<div class="winner">ðŸ† <strong>${state.rounds.length?'Ø§Ù„Ù…ØªØµØ¯Ø± Ø­Ø§Ù„ÙŠØ§Ù‹':'Ø§Ù„ØªØ±ØªÙŠØ¨ Ø§Ù„Ø­Ø§Ù„ÙŠ'}: ${tied.map(p=>esc(p.name)).join(' Ùˆ ')}</strong><div style="font-size:12px;margin-top:4px">Phase ${best.phase} Â· ${best.total} Ù†Ù‚Ø·Ø© Ø¥Ø¬Ù…Ø§Ù„ÙŠØ©${tied.length>1?' Â· ØªØ¹Ø§Ø¯Ù„':''}</div><div class="sub" style="margin:6px 0 0">Ø§Ù„Ø£ÙˆÙ„ÙˆÙŠØ© Ù„Ø£Ø¹Ù„Ù‰ Ù…Ø±Ø­Ù„Ø©ØŒ ÙˆØ¹Ù†Ø¯ ØªØ³Ø§ÙˆÙŠ Ø§Ù„Ù…Ø±Ø­Ù„Ø© ÙŠÙÙˆØ² Ø§Ù„Ø£Ù‚Ù„ ÙÙŠ Ù…Ø¬Ù…ÙˆØ¹ Ø§Ù„Ù†Ù‚Ø§Ø·.</div></div>`;
+ $('historyList').innerHTML=state.rounds.length?state.rounds.map((r,idx)=>`<details class="history-round"><summary>Ø§Ù„Ø¬ÙˆÙ„Ø© ${idx+1}</summary><div class="scroll"><table><thead><tr><th>Ø§Ù„Ù„Ø§Ø¹Ø¨</th><th>Ø§Ù„Ù…Ø±Ø­Ù„Ø© Ù‚Ø¨Ù„</th><th>Ø§Ù„Ù†Ù‚Ø§Ø·</th><th>Ø§Ù„Ù†ØªÙŠØ¬Ø©</th><th>Ø§Ù„Ù…Ø±Ø­Ù„Ø© Ø¨Ø¹Ø¯</th></tr></thead><tbody>${state.players.map(p=>{const x=r.results[p.id];return `<tr><td>${esc(p.name)}</td><td>Phase ${x.before}</td><td>${x.score}</td><td><span class="pill ${x.advanced?'ok':'stay'}">${x.advanced?'ØªÙ‚Ø¯Ù…':'Ø¨Ø§Ù‚Ù'}</span></td><td class="phase">Phase ${x.after}</td></tr>`}).join('')}</tbody></table></div></details>`).join(''):'<div class="empty">Ù„Ù… ÙŠØªÙ… ØªØ³Ø¬ÙŠÙ„ Ø£ÙŠ Ø¬ÙˆÙ„Ø© Ø¨Ø¹Ø¯.</div>';
 }
 $('addPlayer').onclick=()=>{if(state.names.length<8){state.names.push('');renderNames()}};
 $('startGame').onclick=()=>{
  const names=[...$('nameFields').querySelectorAll('input')].map(x=>x.value.trim()).filter(Boolean);
- if(names.length<2){alert('أدخل اسمَي لاعبين على الأقل.');return}
- if(names.length>8){alert('الحد الأقصى 8 لاعبين.');return}
- if(new Set(names.map(n=>n.toLocaleLowerCase())).size!==names.length){alert('من فضلك استخدم أسماء مختلفة للاعبين.');return}
- if(state.active&&!confirm('بدء لعبة جديدة؟ سيتم مسح نتائج اللعبة الحالية.'))return;
+ if(names.length<2){alert('Ø£Ø¯Ø®Ù„ Ø§Ø³Ù…ÙŽÙŠ Ù„Ø§Ø¹Ø¨ÙŠÙ† Ø¹Ù„Ù‰ Ø§Ù„Ø£Ù‚Ù„.');return}
+ if(names.length>8){alert('Ø§Ù„Ø­Ø¯ Ø§Ù„Ø£Ù‚ØµÙ‰ 8 Ù„Ø§Ø¹Ø¨ÙŠÙ†.');return}
+ if(new Set(names.map(n=>n.toLocaleLowerCase())).size!==names.length){alert('Ù…Ù† ÙØ¶Ù„Ùƒ Ø§Ø³ØªØ®Ø¯Ù… Ø£Ø³Ù…Ø§Ø¡ Ù…Ø®ØªÙ„ÙØ© Ù„Ù„Ø§Ø¹Ø¨ÙŠÙ†.');return}
+ if(state.active&&!confirm('Ø¨Ø¯Ø¡ Ù„Ø¹Ø¨Ø© Ø¬Ø¯ÙŠØ¯Ø©ØŸ Ø³ÙŠØªÙ… Ù…Ø³Ø­ Ù†ØªØ§Ø¦Ø¬ Ø§Ù„Ù„Ø¹Ø¨Ø© Ø§Ù„Ø­Ø§Ù„ÙŠØ©.'))return;
  state={names:[...names],players:names.map((name,id)=>({id,name,phase:1})),rounds:[],active:true};save();render();
 };
 $('saveRound').onclick=()=>{
  const fields=[...document.querySelectorAll('[data-score]')];
- if(fields.length!==state.players.length||fields.some(x=>x.value.trim()===''||!Number.isFinite(+x.value)||+x.value<0)){alert('أدخل نقاط الجولة لكل لاعب. أدخل 0 إذا لم يتبق معه نقاط.');return}
+ if(fields.length!==state.players.length||fields.some(x=>x.value.trim()===''||!Number.isFinite(+x.value)||+x.value<0)){alert('Ø£Ø¯Ø®Ù„ Ù†Ù‚Ø§Ø· Ø§Ù„Ø¬ÙˆÙ„Ø© Ù„ÙƒÙ„ Ù„Ø§Ø¹Ø¨. Ø£Ø¯Ø®Ù„ 0 Ø¥Ø°Ø§ Ù„Ù… ÙŠØªØ¨Ù‚ Ù…Ø¹Ù‡ Ù†Ù‚Ø§Ø·.');return}
  const scores={};fields.forEach(x=>scores[x.dataset.score]=Math.floor(+x.value));
  const results={};
  state.players.forEach(p=>{const before=p.phase,score=scores[p.id],advanced=score<50&&before<10,after=advanced?before+1:before;p.phase=after;results[p.id]={before,score,advanced,after}});
@@ -150,14 +154,14 @@ $('saveRound').onclick=()=>{
 };
 $('undo').onclick=()=>{
  if(!state.rounds.length)return;
- if(!confirm('هل تريد التراجع عن آخر جولة؟'))return;
+ if(!confirm('Ù‡Ù„ ØªØ±ÙŠØ¯ Ø§Ù„ØªØ±Ø§Ø¬Ø¹ Ø¹Ù† Ø¢Ø®Ø± Ø¬ÙˆÙ„Ø©ØŸ'))return;
  state.rounds.pop();
  state.players.forEach(p=>p.phase=1);
  state.rounds.forEach(r=>state.players.forEach(p=>p.phase=r.results[p.id].after));
  save();render();
 };
 $('newGame').onclick=()=>{
- if(!confirm('هل تريد إنهاء اللعبة والبدء من جديد؟ سيتم مسح سجلها.'))return;
+ if(!confirm('Ù‡Ù„ ØªØ±ÙŠØ¯ Ø¥Ù†Ù‡Ø§Ø¡ Ø§Ù„Ù„Ø¹Ø¨Ø© ÙˆØ§Ù„Ø¨Ø¯Ø¡ Ù…Ù† Ø¬Ø¯ÙŠØ¯ØŸ Ø³ÙŠØªÙ… Ù…Ø³Ø­ Ø³Ø¬Ù„Ù‡Ø§.'))return;
  const names=state.players.map(p=>p.name);state={names,players:[],rounds:[],active:false};save();renderNames();render();
 };
 load();renderNames();render();
