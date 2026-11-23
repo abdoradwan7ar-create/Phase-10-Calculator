@@ -115,7 +115,18 @@ function render(){
  $('scoreInputs').innerHTML=state.players.map(p=>`<tr><td><b>${esc(p.name)}</b></td><td class="phase">Phase ${p.phase}</td><td><input class="points" type="number" min="0" step="1" inputmode="numeric" placeholder="0" data-score="${p.id}"></td></tr>`).join('');
  $('undo').disabled=!state.rounds.length;
  const ranked=totals().sort((a,b)=>b.phase-a.phase||a.total-b.total||a.name.localeCompare(b.name));
- $('playerCards').innerHTML=ranked.map((p,i)=>`<div class="player-card"><div class="row between"><span class="name">${esc(p.name)}</span><span class="pill">#${i+1}</span></div><div class="big">Phase ${p.phase}</div><div class="small">إجمالي النقاط: <b>${p.total}</b></div><div class="small">نقاط آخر جولة: ${p.last}</div></div>`).join('');
+ const rankNames=['����� ??','������ ??','������ ??','������','������','������','������','������'];
+
+$('playerCards').innerHTML=ranked.map((p,i)=>`
+<div class="player-card">
+  <div class="row between">
+    <span class="name">${esc(p.name)}</span>
+    <span class="pill">${rankNames[i]}</span>
+  </div>
+  <div class="big">Phase ${p.phase}</div>
+  <div class="small">������ ������: <b>${p.total}</b></div>
+  <div class="small">���� ��� ����: ${p.last}</div>
+</div>`).join('');)}</span><span class="pill">#${i+1}</span></div><div class="big">Phase ${p.phase}</div><div class="small">إجمالي النقاط: <b>${p.total}</b></div><div class="small">نقاط آخر جولة: ${p.last}</div></div>`).join('');
  const best=ranked[0], tied=ranked.filter(p=>p.phase===best.phase&&p.total===best.total);
  $('winner').innerHTML=`<div class="winner">🏆 <strong>${state.rounds.length?'المتصدر حالياً':'الترتيب الحالي'}: ${tied.map(p=>esc(p.name)).join(' و ')}</strong><div style="font-size:12px;margin-top:4px">Phase ${best.phase} · ${best.total} نقطة إجمالية${tied.length>1?' · تعادل':''}</div><div class="sub" style="margin:6px 0 0">الأولوية لأعلى مرحلة، وعند تساوي المرحلة يفوز الأقل في مجموع النقاط.</div></div>`;
  $('historyList').innerHTML=state.rounds.length?state.rounds.map((r,idx)=>`<details class="history-round"><summary>الجولة ${idx+1}</summary><div class="scroll"><table><thead><tr><th>اللاعب</th><th>المرحلة قبل</th><th>النقاط</th><th>النتيجة</th><th>المرحلة بعد</th></tr></thead><tbody>${state.players.map(p=>{const x=r.results[p.id];return `<tr><td>${esc(p.name)}</td><td>Phase ${x.before}</td><td>${x.score}</td><td><span class="pill ${x.advanced?'ok':'stay'}">${x.advanced?'تقدم':'باقٍ'}</span></td><td class="phase">Phase ${x.after}</td></tr>`}).join('')}</tbody></table></div></details>`).join(''):'<div class="empty">لم يتم تسجيل أي جولة بعد.</div>';
