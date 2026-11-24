@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#123b35">
+<meta name="theme-color" content="#0878df">
 <link rel="manifest" href="./manifest.json">
 <link rel="icon" type="image/png" href="./phase10-icon-512.png">
 <title>Phase 10 | حاسبة النتائج</title>
@@ -98,29 +98,229 @@ details summary{cursor:pointer;font-weight:700;font-size:14px}
 @media(min-width:560px){
  .players,.player-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
 }
+
+/* ===== Phase 10 colorful home redesign ===== */
+:root{
+ --bg:#eaf5ff;--card:#fff;--ink:#172b55;
+ --muted:#65779b;--green:#168b48;--green2:#e4f8e9;
+ --line:#dce8f7;--red:#e94352;--gold:#ffbf28;
+}
+body{
+ background:
+  radial-gradient(circle at 8% 12%,#bceeff 0 5%,transparent 22%),
+  radial-gradient(circle at 95% 28%,#d8f8ff 0 7%,transparent 24%),
+  linear-gradient(160deg,#078be9 0%,#0870d8 38%,#f1f7ff 38.2%,#fff7e9 100%);
+ background-attachment:fixed;
+}
+main{max-width:780px;padding:12px 14px 34px}
+.app-header{position:relative;text-align:center;padding:16px 8px 12px;color:#fff}
+.app-header h1{
+ margin:0;font-size:clamp(42px,10vw,66px);line-height:.98;
+ letter-spacing:-2px;font-weight:1000;color:#fff;
+ text-shadow:0 4px 0 #073b91,0 8px 16px #002e8060;
+}
+.app-header h1 b{color:#ffdf39;font-style:italic}
+.app-header p{
+ display:inline-block;margin:8px 0 0;padding:3px 18px;
+ border-radius:30px;background:#073b91;color:#ffe45a;
+ font-size:13px;font-weight:900;letter-spacing:4px;
+ box-shadow:0 4px 0 #052b69;
+}
+.logo-cards{height:42px;display:flex;justify-content:center;align-items:end;gap:5px;margin-bottom:5px}
+.mini-card{
+ width:25px;height:37px;border:2px solid #fff;border-radius:7px;
+ color:#fff;font-size:20px;font-weight:1000;line-height:34px;
+ box-shadow:0 3px 7px #003d8c50;
+}
+.card-blue{background:#168df0;transform:rotate(-17deg)}
+.card-red{background:#f13c50;transform:rotate(-8deg)}
+.card-yellow{background:#ffbd20;color:#fff;transform:rotate(0)}
+.card-green{background:#21b94f;transform:rotate(8deg)}
+.card-purple{background:#8c4ce0;transform:rotate(17deg)}
+.home-panel{
+ position:relative;isolation:isolate;overflow:hidden;
+ margin:10px 0 14px;padding:22px 17px 17px;
+ border:3px solid #fff;border-radius:30px;
+ background:
+  radial-gradient(circle at 8% 18%,#ffffff85 0 2px,transparent 3px),
+  radial-gradient(circle at 90% 12%,#ffffff85 0 2px,transparent 3px),
+  linear-gradient(180deg,#087fe2 0%,#0759c8 49%,#fff4dc 49.2%,#ffe6b9 100%);
+ box-shadow:0 12px 28px #003d8c35,inset 0 0 0 1px #ffffff75;
+}
+.home-intro{text-align:center;color:#fff;position:relative;z-index:1;margin:0 0 20px}
+.welcome-ribbon{
+ display:inline-block;padding:7px 28px;margin:0 auto 9px;
+ border-radius:12px 12px 18px 18px;background:linear-gradient(180deg,#fff36b,#ffbd24);
+ color:#073b91;font-size:clamp(23px,6vw,32px);font-weight:1000;
+ box-shadow:0 5px 0 #d68a08,0 8px 14px #002b7440;
+ transform:rotate(-1deg);
+}
+.home-intro h2{font-size:clamp(18px,4.5vw,23px);font-weight:900;margin:8px 0 5px;color:#fff;text-shadow:0 2px 4px #003c8c70}
+.home-intro p{font-size:12px;color:#eaf7ff;margin:0;font-weight:700}
+.home-actions{
+ display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:12px;position:relative;z-index:2;
+}
+.home-actions .home-tile{
+ min-height:185px;width:100%;padding:16px 9px 13px;
+ display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+ border:3px solid #ffffffc9;border-radius:25px;color:#fff;
+ box-shadow:0 8px 0 #073a8d65,0 13px 18px #002f7940,inset 0 3px 5px #ffffff85;
+ text-shadow:0 2px 3px #002c7060;
+ transition:transform .15s ease,filter .15s ease;
+}
+.home-actions .home-tile:active{transform:translateY(4px);filter:brightness(.96);box-shadow:0 4px 0 #073a8d65,0 8px 12px #002f7940}
+.tile-history{background:linear-gradient(145deg,#df5cff,#8c24df 72%,#6415ba)!important}
+.tile-new{background:linear-gradient(145deg,#a8f52b,#43d20e 60%,#19a944)!important}
+.tile-continue{background:linear-gradient(145deg,#ffb52f,#ff741b 65%,#ed4b13)!important}
+.tile-icon{
+ display:grid;place-items:center;width:72px;height:72px;border-radius:50%;
+ background:linear-gradient(145deg,#fff,#dcecff);color:#0753a9;
+ border:4px solid #ffffffc9;font-size:35px;font-weight:1000;
+ box-shadow:0 5px 0 #003b8d55,inset 0 2px 5px #fff;
+ text-shadow:none;
+}
+.tile-history .tile-icon{color:#8c24df}
+.tile-new .tile-icon{color:#15933a}
+.tile-continue .tile-icon{color:#e85b12}
+.tile-label{font-size:clamp(14px,3.4vw,18px);font-weight:1000;line-height:1.35}
+.tile-arrow{
+ width:30px;height:30px;border-radius:50%;display:grid;place-items:center;
+ background:#002d7a45;border:1px solid #ffffff80;font-size:25px;line-height:20px;
+}
+.backup-tools{
+ position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;
+ gap:10px;margin:24px auto 4px;max-width:560px;
+}
+.backup-button{
+ min-height:48px;padding:9px 10px;border-radius:16px;
+ border:2px solid #ffffffd9;font-size:12px;font-weight:900;
+ color:#073b83;background:linear-gradient(180deg,#d9f8ff,#8be4f5);
+ box-shadow:0 4px 0 #0875b5,0 7px 12px #003c8030;
+}
+.backup-button span{font-size:20px;vertical-align:middle;margin-left:5px}
+.backup-import{background:linear-gradient(180deg,#e5ffdc,#a7f0bd);box-shadow:0 4px 0 #299c60,0 7px 12px #003c8030}
+.home-card-fan{
+ display:flex;justify-content:center;align-items:end;gap:5px;
+ height:66px;margin:13px auto 0;position:relative;z-index:1;
+}
+.fan-card{
+ display:grid;place-items:center;width:40px;height:57px;border:3px solid #fff;
+ border-radius:8px;color:#fff;font-size:28px;font-weight:1000;
+ box-shadow:0 3px 8px #174c8b50;text-shadow:0 2px 3px #0003;
+}
+.fan-one{background:#168df0;transform:rotate(-19deg) translateY(4px)}
+.fan-two{background:#f13c50;transform:rotate(-9deg) translateY(-2px)}
+.fan-three{background:#ffbd20;transform:translateY(-7px)}
+.fan-four{background:#21b94f;transform:rotate(9deg) translateY(-2px)}
+.fan-five{background:#8c4ce0;transform:rotate(19deg) translateY(4px)}
+.brand-note{
+ display:flex;justify-content:center;align-items:center;gap:6px;flex-wrap:wrap;
+ margin:15px 0 0;padding-top:12px;border-top:1px solid #ffffff70;
+ color:#244a85;font-size:10px;letter-spacing:.3px;font-weight:700;
+}
+.brand-note strong{font-size:13px;letter-spacing:2px;color:#073b91}
+.brand-note i{color:#f3a900;font-style:normal}
+.home-sparkle{position:absolute;color:#fff8a8;font-size:28px;text-shadow:0 0 12px #fff;z-index:0}
+.sparkle-one{top:19px;right:19px}
+.sparkle-two{top:125px;left:17px;font-size:21px}
+.home-panel .backup-tools,.home-panel .home-actions,.home-panel .home-intro{direction:rtl}
+.home-panel .home-tile{direction:rtl}
+@media(max-width:520px){
+ main{padding:8px 10px 28px}
+ .app-header{padding:10px 6px 9px}
+ .home-panel{padding:19px 13px 14px;border-radius:25px}
+ .home-actions{grid-template-columns:1fr;gap:10px}
+ .home-actions .home-tile{
+  min-height:100px;display:grid;
+  grid-template-columns:76px 1fr 32px;grid-template-rows:1fr;
+  justify-items:center;gap:8px;padding:10px 13px;border-radius:21px;
+ }
+ .tile-icon{width:62px;height:62px;font-size:30px;grid-column:1;grid-row:1}
+ .tile-label{grid-column:2;grid-row:1;font-size:18px;justify-self:center}
+ .tile-arrow{grid-column:3;grid-row:1}
+ .backup-tools{gap:8px;margin-top:19px}
+ .backup-button{font-size:11px;padding:8px 5px;min-height:46px}
+ .home-card-fan{height:56px;margin-top:10px}
+ .fan-card{width:34px;height:49px;font-size:24px}
+}
+@media(min-width:521px){
+ .home-panel{padding:25px 22px 18px}
+ .home-actions .home-tile{min-height:195px}
+}
+
 </style>
 </head>
 
 <body>
 <main>
 
-<header>
- <h1>PHASE 10</h1>
- <p>حاسبة المراحل والنتائج</p>
+<header class="app-header">
+ <div class="logo-cards" aria-hidden="true">
+  <span class="mini-card card-blue">1</span>
+  <span class="mini-card card-red">2</span>
+  <span class="mini-card card-yellow">3</span>
+  <span class="mini-card card-green">4</span>
+  <span class="mini-card card-purple">5</span>
+ </div>
+ <h1><span>PHASE</span> <b>10</b></h1>
+ <p>CALCULATOR</p>
 </header>
 
 <!-- الشاشة الرئيسية -->
-<section class="card" id="home">
- <h2 style="text-align:center">أهلاً بك في Phase 10</h2>
- <p class="sub" style="text-align:center">
-  سجّل الجولات، تابع المراحل، واحتفظ بنتائج ألعابك السابقة.
- </p>
- <div class="home-actions">
-  <button id="goSetup">＋ بدء لعبة جديدة</button>
-  <button class="light hidden" id="resumeGame">استئناف اللعبة الحالية</button>
-  <button class="light" id="showArchive">سجل الألعاب السابقة</button>
+<section class="home-panel" id="home">
+ <div class="home-sparkle sparkle-one" aria-hidden="true">✦</div>
+ <div class="home-sparkle sparkle-two" aria-hidden="true">✧</div>
+ <div class="home-intro">
+  <div class="welcome-ribbon">جاهز للعب؟</div>
+  <h2>خلّي المنافسة تبدأ!</h2>
+  <p>تابع المراحل واحسب النتائج واستمتع بكل جولة</p>
  </div>
- <div class="brand-note">PHASE 10 CALCULATOR BY HAMID</div>
+
+ <div class="home-actions">
+  <button id="showArchive" class="home-tile tile-history">
+   <span class="tile-icon" aria-hidden="true">🏆</span>
+   <span class="tile-label">سجل الألعاب</span>
+   <span class="tile-arrow" aria-hidden="true">‹</span>
+  </button>
+
+  <button id="goSetup" class="home-tile tile-new">
+   <span class="tile-icon" aria-hidden="true">▶</span>
+   <span class="tile-label">بدء لعبة جديدة</span>
+   <span class="tile-arrow" aria-hidden="true">‹</span>
+  </button>
+
+  <button id="resumeGame" class="home-tile tile-continue hidden">
+   <span class="tile-icon" aria-hidden="true">🔄</span>
+   <span class="tile-label">استكمال اللعبة</span>
+   <span class="tile-arrow" aria-hidden="true">‹</span>
+  </button>
+ </div>
+
+ <div class="backup-tools">
+  <button id="exportBackup" class="backup-button backup-export">
+   <span aria-hidden="true">⤴</span> تصدير نسخة احتياطية
+  </button>
+  <button id="importBackup" class="backup-button backup-import">
+   <span aria-hidden="true">⤓</span> استيراد نسخة احتياطية
+  </button>
+ </div>
+
+ <input type="file" id="backupFile" accept=".json" style="display:none">
+
+ <div class="home-card-fan" aria-hidden="true">
+  <span class="fan-card fan-one">1</span>
+  <span class="fan-card fan-two">2</span>
+  <span class="fan-card fan-three">3</span>
+  <span class="fan-card fan-four">4</span>
+  <span class="fan-card fan-five">5</span>
+ </div>
+
+ <div class="brand-note">
+  <span>Designed &amp; Developed by</span>
+  <strong>HAMID</strong>
+  <i>✦</i>
+ </div>
 </section>
 
 <!-- إعداد اللاعبين -->
@@ -130,11 +330,29 @@ details summary{cursor:pointer;font-weight:700;font-size:14px}
   <button class="light" id="backHome1">الرئيسية</button>
  </div>
  <p class="sub">أدخل أسماء من لاعبين إلى 8 لاعبين. يبدأ الجميع من المرحلة الأولى.</p>
- <div class="players" id="nameFields"></div>
- <div class="row" style="margin-top:12px">
-  <button class="light" id="addPlayer">＋ إضافة لاعب</button>
-  <button id="startGame">بدء اللعبة</button>
- </div>
+
+<div style="margin-bottom:14px">
+ <label for="playerCount" style="display:block;font-size:13px;font-weight:700;margin-bottom:7px">
+  اختر عدد اللاعبين أولاً
+ </label>
+ <select id="playerCount" style="width:100%;font:inherit;padding:12px;border:1px solid #d5e0da;border-radius:10px;background:white">
+  <option value="">اختر عدد اللاعبين</option>
+  <option value="2">2 لاعبين</option>
+  <option value="3">3 لاعبين</option>
+  <option value="4">4 لاعبين</option>
+  <option value="5">5 لاعبين</option>
+  <option value="6">6 لاعبين</option>
+  <option value="7">7 لاعبين</option>
+  <option value="8">8 لاعبين</option>
+ </select>
+</div>
+
+<div class="players" id="nameFields"></div>
+
+<div class="row" style="margin-top:12px">
+ <button id="startGame" disabled>بدء اللعبة</button>
+</div>
+
 </section>
 
 <!-- تسجيل الجولة -->
@@ -189,11 +407,97 @@ details summary{cursor:pointer;font-weight:700;font-size:14px}
 <section class="card hidden" id="archive">
  <div class="row between">
   <h2 style="margin:0">سجل الألعاب السابقة</h2>
-  <button class="light" id="backHome3">الرئيسية</button>
+
+<div class="row">
+ <button class="red" id="clearArchive"
+  style="padding:8px 11px;font-size:12px">
+  🗑️ مسح الكل
+ </button>
+
+ <button class="light" id="backHome3">الرئيسية</button>
+</div>
  </div>
  <div id="archiveList"></div>
 </section>
+<!-- نافذة خيارات إنهاء اللعبة -->
+<div id="endModal" class="hidden" style="
+ position:fixed;
+ inset:0;
+ background:#0009;
+ z-index:9999;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ padding:20px
+">
+ <div style="
+  background:white;
+  width:100%;
+  max-width:380px;
+  border-radius:20px;
+  padding:22px;
+  box-shadow:0 10px 40px #0003
+ ">
+  <h2 style="text-align:center;margin-bottom:8px">
+   إنهاء اللعبة
+  </h2>
 
+  <p class="sub" style="text-align:center;margin-bottom:20px">
+   اختر ماذا تريد أن تفعل باللعبة الحالية
+  </p>
+
+  <div style="display:grid;gap:10px">
+   <button id="deleteGameOption" class="red">
+    🗑️ إنهاء بدون حفظ
+   </button>
+
+   <button id="saveGameOption">
+    💾 إنهاء وحفظ في الأرشيف
+   </button>
+
+   <button id="pauseGameOption" class="light">
+    ⏸️ إيقاف مؤقت واستكمال لاحقاً
+   </button>
+
+   <button id="cancelEndModal" class="light">
+    إلغاء
+   </button>
+  </div>
+ </div>
+</div>
+<!-- نافذة التأكيد الموحدة -->
+<div id="confirmModal" class="hidden" style="
+ position:fixed;
+ inset:0;
+ background:#0009;
+ z-index:10000;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ padding:20px
+">
+ <div style="
+  background:white;
+  width:100%;
+  max-width:380px;
+  border-radius:20px;
+  padding:22px;
+  box-shadow:0 10px 40px #0003
+ ">
+  <h2 id="confirmTitle" style="text-align:center;margin-bottom:10px">
+   تأكيد العملية
+  </h2>
+
+  <p id="confirmMessage" class="sub" style="text-align:center;margin-bottom:22px">
+   هل أنت متأكد؟
+  </p>
+
+  <div class="row">
+   <button id="confirmYes" class="red">تأكيد</button>
+   <button id="confirmNo" class="light">إلغاء</button>
+  </div>
+ </div>
+</div>
 <div class="footer">
  تُحفظ اللعبة الحالية والأرشيف تلقائياً على هذا الجهاز وفي هذا المتصفح.
 </div>
@@ -202,6 +506,29 @@ details summary{cursor:pointer;font-weight:700;font-size:14px}
 
 <script>
 const $=id=>document.getElementById(id);
+let confirmCallback=null;
+
+function showConfirm(title,message,onConfirm){
+ $('confirmTitle').textContent=title;
+ $('confirmMessage').textContent=message;
+ confirmCallback=onConfirm;
+ $('confirmModal').classList.remove('hidden');
+}
+
+$('confirmNo').onclick=()=>{
+ $('confirmModal').classList.add('hidden');
+ confirmCallback=null;
+};
+
+$('confirmYes').onclick=()=>{
+ $('confirmModal').classList.add('hidden');
+
+ if(confirmCallback){
+  const action=confirmCallback;
+  confirmCallback=null;
+  action();
+ }
+};
 
 const CURRENT_KEY='phase10_current_v2';
 const ARCHIVE_KEY='phase10_archive_v2';
@@ -237,8 +564,12 @@ function esc(s){
 }
 
 function show(id){
+ const visible = id === 'game'
+  ? ['game','standings','historySection']
+  : [id];
+
  ['home','setup','game','standings','historySection','archive']
- .forEach(x=>$(x).classList.toggle('hidden',x!==id));
+ .forEach(x=>$(x).classList.toggle('hidden',!visible.includes(x)));
 }
 
 function activePlayers(){
@@ -256,6 +587,7 @@ function totals(){
 }
 
 /* إعادة حساب المراحل وحالة الإنهاء من سجل الجولات */
+
 function rebuild(){
  state.players=state.names.map((name,id)=>({
   id,name,phase:1,completed:false,finishRound:null,finishOrder:null
@@ -279,9 +611,16 @@ function rebuild(){
   });
 
   if(newly.length){
-   const sums=totals().map(p=>({id:p.id,total:p.total}));
+   const sums=state.players.map(p=>({
+    id:p.id,
+    total:state.rounds.slice(0,index+1).reduce(
+     (sum,round)=>sum+(round.scores[p.id]??0),0
+    )
+   }));
+
    newly.sort((a,b)=>
-    sums.find(x=>x.id===a.id).total-sums.find(x=>x.id===b.id).total
+    sums.find(x=>x.id===a.id).total-
+    sums.find(x=>x.id===b.id).total
    );
 
    let order=state.players.filter(
@@ -290,6 +629,7 @@ function rebuild(){
 
    for(let i=0;i<newly.length;){
     let j=i+1;
+
     while(
      j<newly.length&&
      sums.find(x=>x.id===newly[j].id).total===
@@ -303,6 +643,7 @@ function rebuild(){
   }
  });
 }
+
 
 /* ترتيب اللاعبين */
 function ranking(){
@@ -321,12 +662,21 @@ function ranking(){
 }
 
 /* تجهيز خانات الأسماء */
+
+
 function renderNames(){
  const names=read(NAMES_KEY,[]);
  const box=$('nameFields');
- box.innerHTML='';
 
- const count=Math.max(2,Math.min(8,window.setupCount||2));
+ const oldValues=[...box.querySelectorAll('input[data-name]')]
+  .map(x=>x.value);
+
+ const count=Number($('playerCount').value);
+
+ box.innerHTML='';
+ $('startGame').disabled=!count;
+
+ if(!count)return;
 
  for(let i=0;i<count;i++){
   const d=document.createElement('div');
@@ -336,6 +686,7 @@ function renderNames(){
    <input maxlength="24" placeholder="اسم اللاعب"
     list="knownNames" data-name="${i}" autocomplete="off">
   `;
+  d.querySelector('input').value=oldValues[i]||'';
   box.append(d);
  }
 
@@ -343,9 +694,9 @@ function renderNames(){
  dl.id='knownNames';
  dl.innerHTML=names.map(n=>`<option value="${esc(n)}">`).join('');
  box.append(dl);
-
- $('addPlayer').disabled=count>=8;
 }
+
+
 
 /* حفظ الأسماء السابقة للاقتراح */
 function rememberNames(names){
@@ -374,8 +725,8 @@ function renderGame(){
    <td><b>${esc(p.name)}</b></td>
    <td class="phase">Phase ${p.phase}</td>
    <td>
-    <input class="points" type="number" min="0" step="1"
-     inputmode="numeric" placeholder="0" data-score="${p.id}">
+<input class="points" type="number" min="0" step="5"
+ inputmode="numeric" placeholder="0" data-score="${p.id}">
    </td>
   </tr>
  `).join('');
@@ -392,40 +743,62 @@ function renderGame(){
 }
 
 /* عرض الترتيب */
+
 function renderStandings(){
  $('roundCount').textContent=state.rounds.length+' جولة مكتملة';
 
  const ranked=ranking();
+ const medals=['🥇','🥈','🥉'];
 
  $('playerCards').innerHTML=ranked.map((p,i)=>`
-  <div class="player-card">
+  <div class="player-card" style="
+   border:${i<3?'2px solid '+['#e5bd45','#b8c1c6','#c58b60'][i]:'1px solid var(--line)'};
+   background:${i===0?'#fffaf0':'#fff'};
+   position:relative
+  ">
    <div class="row between">
     <span class="name">${esc(p.name)}</span>
-    <span class="pill">#${i+1}</span>
+    <span class="pill">${medals[i]||('#'+(i+1))}</span>
    </div>
-   <div class="big">${p.completed?'أنهى اللعبة':'Phase '+p.phase}</div>
+   <div class="big">${p.completed?'🏆 أنهى اللعبة':'Phase '+p.phase}</div>
    <div class="small">إجمالي النقاط: <b>${p.total}</b></div>
    <div class="small">
-    ${p.completed?'أنهى في الجولة '+p.finishRound:'نقاط آخر جولة: '+p.last}
+    ${p.completed
+     ?'أنهى في الجولة '+p.finishRound
+     :'نقاط آخر جولة: '+p.last}
    </div>
+   ${i===0?'<div class="small" style="color:#a47b12;font-weight:800;margin-top:5px">المتصدر الحالي</div>':''}
   </div>
  `).join('');
 
  const done=ranked.filter(p=>p.completed);
+ const first=done.filter(p=>p.finishOrder===1);
 
  $('winner').innerHTML=done.length?`
-  <div class="winner">
-   🏆 <strong>
-    أول من أنهى Phase 10:
-    ${esc(done.filter(p=>p.finishOrder===1).map(p=>p.name).join(' و '))}
-   </strong>
-   <div class="sub" style="margin:6px 0 0">
-    ترتيب المنتهين حسب جولة الإنهاء، وعند الإنهاء في الجولة نفسها
-    يحسم الأقل مجموعاً للنقاط.
+  <div class="winner" style="
+   text-align:center;
+   padding:22px 14px;
+   background:linear-gradient(135deg,#fff9e8,#fff);
+   border:2px solid #e8ce83;
+   border-radius:18px;
+   margin-top:16px
+  ">
+   <div style="font-size:42px">🏆</div>
+   <div style="font-size:18px;font-weight:900;color:#7b5a00;margin:8px 0">
+    ${first.length===1?'الفائز باللعبة':'المتعادلون في المركز الأول'}
+   </div>
+   <div style="font-size:21px;font-weight:900;color:var(--green)">
+    ${esc(first.map(p=>p.name).join(' و '))}
+   </div>
+   <div class="sub" style="margin:9px 0 0">
+    ${first.length===1
+     ?'أول لاعب أكمل المرحلة العاشرة بنجاح.'
+     :'أكملوا المرحلة العاشرة في الجولة نفسها.'}
    </div>
   </div>
  `:'<div class="empty">لم ينهِ أي لاعب المرحلة العاشرة حتى الآن.</div>';
 }
+
 
 /* سجل الجولات */
 function renderRounds(){
@@ -476,7 +849,11 @@ function renderRounds(){
 /* حفظ اللعبة في الأرشيف */
 function archiveCurrent(manual){
  if(!state||!state.rounds.length){
-  alert('لا توجد جولات لحفظها في السجل بعد.');
+  showConfirm(
+   'لا توجد جولات',
+   'لا توجد جولات لحفظها في السجل بعد.',
+   ()=>{}
+  );
   return;
  }
 
@@ -503,38 +880,198 @@ function archiveCurrent(manual){
 }
 
 /* عرض الأرشيف */
+
 function renderArchive(){
  archive=read(ARCHIVE_KEY,[]);
 
  $('archiveList').innerHTML=archive.length
- ?archive.map(g=>`
-  <div class="archive-item">
-   <h3>لعبة بتاريخ ${esc(g.date)}</h3>
-   <p>
-    ${g.names.length} لاعبين · ${g.rounds.length} جولات ·
-    ${g.manual?'إنهاء يدوي':'اكتملت اللعبة'}
-   </p>
-   <div>
-    ${(g.ranking||g.players).map((p,i)=>`
-     <div class="rank-line">
-      ${i+1}. <b>${esc(p.name)}</b> —
-      ${p.completed?'أنهى Phase 10':'Phase '+p.phase} ·
-      ${p.total??g.rounds.reduce(
-       (s,r)=>s+(r.scores[p.id]??0),0
-      )} نقطة
+ ?archive.map(g=>{
+  const ranked=g.ranking||g.players||[];
+  const medals=['🥇','🥈','🥉'];
+
+  return `
+   <div class="archive-item" style="
+    padding:16px;
+    border-radius:17px;
+    margin:14px 0;
+    background:linear-gradient(145deg,#fff,#f5f9f6);
+    box-shadow:0 4px 14px #17352c0d
+   ">
+    <div class="row between">
+     <div>
+      <h3 style="font-size:17px;color:var(--green)">
+       🏆 لعبة Phase 10
+      </h3>
+      <p style="margin:5px 0">
+       ${esc(g.date)}
+      </p>
      </div>
-    `).join('')}
+     <span class="pill">${g.manual?'إنهاء يدوي':'انتهاء تلقائي'}</span>
+<button class="red" data-delete-id="${g.id}" title="حذف اللعبة"
+ style="
+  width:38px;
+  height:38px;
+  padding:0;
+  border-radius:10px;
+  font-size:19px;
+  display:flex;
+  align-items:center;
+  justify-content:center
+ ">
+ 🗑️
+</button>
+    </div>
+
+    <div class="row" style="
+     gap:7px;
+     margin:12px 0;
+     padding:10px;
+     background:#edf4ef;
+     border-radius:12px;
+     justify-content:space-around
+    ">
+     <div style="text-align:center">
+      <div style="font-size:19px">👥</div>
+      <b>${g.names.length}</b>
+      <div class="small">لاعبين</div>
+     </div>
+     <div style="text-align:center">
+      <div style="font-size:19px">🎴</div>
+      <b>${g.rounds.length}</b>
+      <div class="small">جولات</div>
+     </div>
+     <div style="text-align:center">
+      <div style="font-size:19px">🏁</div>
+      <b>${ranked.length}</b>
+      <div class="small">ترتيب</div>
+     </div>
+    </div>
+
+    <div style="
+     font-weight:800;
+     font-size:14px;
+     margin:15px 0 9px;
+     color:var(--ink)
+    ">
+     الترتيب النهائي
+    </div>
+
+    ${ranked.map((p,i)=>{
+     const total=p.total??g.rounds.reduce(
+      (s,r)=>s+(r.scores[p.id]??0),0
+     );
+
+     return `
+      <div style="
+       display:flex;
+       align-items:center;
+       gap:10px;
+       padding:11px;
+       margin:6px 0;
+       border-radius:12px;
+       background:${i===0?'#fff5d9':i===1?'#f0f2f3':i===2?'#f8eee6':'#fff'};
+       border:1px solid ${i===0?'#ead18a':'var(--line)'};
+      ">
+       <div style="
+        width:35px;
+        text-align:center;
+        font-size:${i<3?'23px':'14px'};
+        font-weight:900
+       ">
+        ${medals[i]||('#'+(i+1))}
+       </div>
+
+       <div style="flex:1;min-width:0">
+        <div style="font-weight:800;overflow-wrap:anywhere">
+         ${esc(p.name)}
+        </div>
+        <div class="small">
+         ${p.completed?'أكمل Phase 10':'Phase '+p.phase}
+         ${p.finishRound?' · الجولة '+p.finishRound:''}
+        </div>
+       </div>
+
+       <div style="text-align:center;white-space:nowrap">
+        <div style="font-size:18px;font-weight:900;color:var(--green)">
+         ${total}
+        </div>
+        <div class="small">نقطة</div>
+       </div>
+      </div>
+     `;
+    }).join('')}
+
+    <details style="margin-top:13px">
+     <summary style="
+      padding:11px;
+      border-radius:10px;
+      background:#edf2ef
+     ">
+      عرض سجل الجولات
+     </summary>
+     <div style="margin-top:10px">
+      ${g.rounds.map((r,i)=>`
+       <div class="history-round">
+        <div style="
+         padding:10px;
+         background:#f8faf9;
+         font-weight:800;
+         font-size:13px
+        ">
+         الجولة ${i+1}
+        </div>
+        <div class="scroll">
+         <table>
+          <thead>
+           <tr><th>اللاعب</th><th>النقاط</th></tr>
+          </thead>
+          <tbody>
+           ${ranked.filter(p=>
+            Object.prototype.hasOwnProperty.call(r.scores,p.id)
+           ).map(p=>`
+            <tr>
+             <td>${esc(p.name)}</td>
+             <td>${r.scores[p.id]}</td>
+            </tr>
+           `).join('')}
+          </tbody>
+         </table>
+        </div>
+       </div>
+      `).join('')}
+     </div>
+    </details>
    </div>
-  </div>
- `).join('')
- :'<div class="empty">لا توجد ألعاب محفوظة حتى الآن.</div>';
+  `;
+ }).join('')
+  :'<div class="empty">لا توجد ألعاب محفوظة حتى الآن.</div>';
+
+ $('archiveList').querySelectorAll('[data-delete-id]').forEach(btn=>{
+  btn.onclick=()=>{
+   const id=Number(btn.dataset.deleteId);
+
+showConfirm(
+ 'تأكيد حذف اللعبة',
+ 'هل أنت متأكد من حذف هذه اللعبة نهائياً؟',
+ ()=>{
+  archive=archive.filter(g=>g.id!==id);
+  saveArchive();
+  renderArchive();
+ }
+);
+  };
+ });
 }
 
 /* التنقل */
 $('goSetup').onclick=()=>{
- window.setupCount=2;
- renderNames();
+ $('playerCount').value='';
+ $('nameFields').innerHTML='';
+ $('startGame').disabled=true;
  show('setup');
+};
+$('playerCount').onchange=()=>{
+ renderNames();
 };
 
 $('backHome1').onclick=()=>show('home');
@@ -545,7 +1082,27 @@ $('showArchive').onclick=()=>{
  renderArchive();
  show('archive');
 };
+$('clearArchive').onclick=()=>{
+ if(!archive.length){
+ showConfirm(
+  'الأرشيف فارغ',
+  'لا توجد ألعاب محفوظة في الأرشيف حالياً.',
+  ()=>{}
+ );
+ return;
+}
 
+ showConfirm(
+  'تأكيد مسح الأرشيف',
+  'هل أنت متأكد من حذف جميع الألعاب المحفوظة؟ لا يمكن التراجع عن هذا الإجراء.',
+  ()=>{
+   archive=[];
+   saveArchive();
+   renderArchive();
+   
+  }
+ );
+};
 $('resumeGame').onclick=()=>{
  if(state){
   rebuild();
@@ -553,33 +1110,108 @@ $('resumeGame').onclick=()=>{
  }
 };
 
-$('addPlayer').onclick=()=>{
- if(window.setupCount<8){
-  window.setupCount++;
-  renderNames();
- }
+/* النسخ الاحتياطي واستعادة البيانات */
+
+$('exportBackup').onclick=()=>{
+ const backup={
+  app:'Phase 10 Calculator',
+  version:1,
+  current:JSON.parse(localStorage.getItem(CURRENT_KEY)||'null'),
+  archive:JSON.parse(localStorage.getItem(ARCHIVE_KEY)||'[]')
+ };
+
+ const blob=new Blob(
+  [JSON.stringify(backup,null,2)],
+  {type:'application/json'}
+ );
+
+ const url=URL.createObjectURL(blob);
+ const link=document.createElement('a');
+
+ link.href=url;
+ link.download='Phase10-Backup-'+new Date().toISOString().slice(0,10)+'.json';
+
+ link.click();
+ URL.revokeObjectURL(url);
+
+ 
 };
 
+$('importBackup').onclick=()=>{
+ $('backupFile').click();
+};
+
+$('backupFile').onchange=(event)=>{
+ const file=event.target.files[0];
+ if(!file)return;
+
+ const reader=new FileReader();
+
+reader.onload=()=>{
+  try{
+   const backup=JSON.parse(reader.result);
+
+   if(
+    backup.app!=='Phase 10 Calculator'||
+    !Array.isArray(backup.archive)||
+    (backup.current!==null&&
+     (typeof backup.current!=='object'||Array.isArray(backup.current)))
+   ){
+    showConfirm(
+     'ملف غير صالح',
+     'ملف النسخة الاحتياطية غير صالح. تأكد من اختيار ملف صحيح.',
+     ()=>{}
+    );
+    return;
+   }
+
+   showConfirm(
+    'تأكيد استعادة النسخة الاحتياطية',
+    'سيتم استبدال اللعبة الحالية والأرشيف بالبيانات الموجودة في الملف. هل تريد المتابعة؟',
+    ()=>{
+     localStorage.setItem(CURRENT_KEY,JSON.stringify(backup.current));
+     localStorage.setItem(ARCHIVE_KEY,JSON.stringify(backup.archive));
+     location.reload();
+    }
+   );
+
+  }catch(error){
+   showConfirm(
+    'تعذر قراءة الملف',
+    'الملف تالف أو غير صالح كنسخة احتياطية. تأكد من اختيار ملف صحيح.',
+    ()=>{}
+   );
+  }
+ };
+
+ 
+ reader.readAsText(file);
+ event.target.value='';
+};
 /* بدء لعبة */
 $('startGame').onclick=()=>{
- const names=[
-  ...$('nameFields').querySelectorAll('input[data-name]')
- ].map(x=>x.value.trim()).filter(Boolean);
+ const selectedCount=Number($('playerCount').value);
 
- if(names.length<2){
-  alert('أدخل اسمَي لاعبين على الأقل.');
-  return;
- }
+const names=[
+ ...$('nameFields').querySelectorAll('input[data-name]')
+].map(x=>x.value.trim());
+if(!selectedCount){
+ showConfirm(
+  'اختيار عدد اللاعبين',
+  'اختر عدد اللاعبين أولاً.',
+  ()=>{}
+ );
+ return;
+}
 
- if(names.length>8){
-  alert('الحد الأقصى 8 لاعبين.');
-  return;
- }
-
- if(new Set(names.map(n=>n.toLocaleLowerCase())).size!==names.length){
-  alert('من فضلك استخدم أسماء مختلفة للاعبين.');
-  return;
- }
+if(names.length!==selectedCount||names.some(n=>!n)){
+ showConfirm(
+  'أسماء اللاعبين',
+  'من فضلك أدخل اسم كل اللاعبين.',
+  ()=>{}
+ );
+ return;
+}
 
  if(state&&state.rounds.length&&
   !confirm('هناك لعبة حالية. بدء لعبة جديدة سيحفظها في الأرشيف أولاً.')
@@ -617,19 +1249,33 @@ $('saveRound').onclick=()=>{
  const players=activePlayers();
  const fields=[...document.querySelectorAll('[data-score]')];
 
- if(
+if(
   fields.length!==players.length||
   fields.some(x=>
    x.value.trim()===''||
    !Number.isFinite(+x.value)||
-   +x.value<0
+   +x.value<0||
+   +x.value%5!==0
   )
  ){
-  alert('أدخل نقاط الجولة لكل لاعب نشط. أدخل 0 إذا لم يتبق معه نقاط.');
-  return;
- }
+showConfirm(
+ 'تنبيه النقاط',
+ 'النقاط لازم تكون 0 أو 5 أو أحد مضاعفات الرقم 5، ولازم تدخل نقاط كل اللاعبين.',
+ ()=>{}
+);
+return;
+}
 
- const scores={};
+if(!fields.some(x=>Number(x.value)===0)){
+ showConfirm(
+  'تنبيه إنهاء الجولة',
+  'لازم لاعب واحد على الأقل تكون نتيجته 0 لإنهاء الجولة.',
+  ()=>{}
+ );
+ return;
+}
+
+const scores={};
  fields.forEach(x=>{
   scores[x.dataset.score]=Math.floor(+x.value);
  });
@@ -652,33 +1298,75 @@ $('saveRound').onclick=()=>{
 
  rebuild();
  saveCurrent();
-
- if(state.players.every(p=>p.completed)){
+if(state.players.every(p=>p.completed)){
   archiveCurrent(false);
-  alert('مبروك! اكتملت اللعبة وتم حفظ النتائج في سجل الألعاب.');
+  
   return;
- }
+}
 
- renderGame();
+if(activePlayers().length===1){
+  const lastPlayer=activePlayers()[0].name;
+  archiveCurrent(false);
+
+  return;
+}
+
+renderGame();
 };
-
 /* التراجع عن آخر جولة */
 $('undo').onclick=()=>{
  if(!state?.rounds.length)return;
 
- if(!confirm('هل تريد التراجع عن آخر جولة؟'))return;
-
- state.rounds.pop();
- rebuild();
- saveCurrent();
- renderGame();
+ showConfirm(
+  'تأكيد التراجع عن الجولة',
+  'هل تريد التراجع عن آخر جولة؟ سيتم حذف نتائج هذه الجولة وإعادة احتساب الترتيب.',
+  ()=>{
+   state.rounds.pop();
+   rebuild();
+   saveCurrent();
+   renderGame();
+  }
+ );
+};
+/* خيارات إنهاء اللعبة */
+/* خيارات إنهاء اللعبة */
+$('endGame').onclick=()=>{
+ $('endModal').classList.remove('hidden');
 };
 
-/* إنهاء اللعبة يدوياً */
-$('endGame').onclick=()=>{
- if(confirm('إنهاء اللعبة الحالية وحفظ ترتيب اللاعبين في سجل الألعاب؟')){
-  archiveCurrent(true);
- }
+$('cancelEndModal').onclick=()=>{
+ $('endModal').classList.add('hidden');
+};
+$('deleteGameOption').onclick=()=>{
+ showConfirm(
+  'تأكيد حذف اللعبة',
+  'هل أنت متأكد؟ سيتم حذف اللعبة الحالية وجميع جولاتها نهائياً.',
+  ()=>{
+   state=null;
+   saveCurrent();
+   $('resumeGame').classList.add('hidden');
+   $('endModal').classList.add('hidden');
+   show('home');
+   
+  }
+ );
+};
+$('saveGameOption').onclick=()=>{
+ showConfirm(
+  'تأكيد حفظ اللعبة',
+  'سيتم حفظ اللعبة وترتيب اللاعبين في الأرشيف. هل تريد المتابعة؟',
+  ()=>{
+   $('endModal').classList.add('hidden');
+   archiveCurrent(true);
+  }
+ );
+};
+$('pauseGameOption').onclick=()=>{
+ saveCurrent();
+ $('resumeGame').classList.remove('hidden');
+ $('endModal').classList.add('hidden');
+ show('home');
+ 
 };
 
 /* استعادة اللعبة الحالية عند فتح التطبيق */
