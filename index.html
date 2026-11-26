@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
@@ -8,74 +7,71 @@
 <link rel="manifest" href="./manifest.json">
 <link rel="icon" type="image/png" href="./phase10-icon-512.png">
 <title>Phase 10 | حاسبة النتائج</title>
-
 <style>
+/* بطاقات تسجيل نقاط اللاعبين */
+.score-cards{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+ gap:14px;margin-top:15px
+}
+.score-card{
+ background:linear-gradient(145deg,#ffffff,#eaf5ff);
+ border:2px solid #cce5ff;border-radius:20px;padding:17px;
+ box-shadow:0 5px 14px #0753a910;
+ display:flex;flex-direction:column;gap:16px
+}
+.score-player-info{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.score-player-name{color:#124b83;font-size:19px;font-weight:900}
+.score-phase{background:linear-gradient(135deg,#087fe2,#0753a9);color:white;padding:7px 12px;border-radius:20px;font-size:12px;font-weight:900}
+.score-input-area{display:flex;flex-direction:column;gap:8px}
+.score-input-area label{color:#647b99;font-size:13px;font-weight:800}
+.score-input-area .points{width:100%;box-sizing:border-box;font-size:24px;padding:13px}
+
 :root{
  --bg:#f2f6f4;--card:#fff;--ink:#172b27;
  --muted:#71817b;--green:#176b50;--green2:#e6f4ed;
  --line:#e1eae5;--red:#b64040;--gold:#b8860b
 }
 *{box-sizing:border-box}
-body{
- margin:0;background:var(--bg);color:var(--ink);
- font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif
-}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif}
 main{max-width:760px;margin:auto;padding:16px 13px 38px}
 header{text-align:center;padding:22px 8px 20px}
 header h1{font-size:34px;letter-spacing:1px;margin:0;color:var(--green)}
 header p{margin:5px 0 0;color:var(--muted);font-size:13px}
-.card{
- background:var(--card);border:1px solid var(--line);
- border-radius:17px;padding:16px;margin:12px 0;
- box-shadow:0 4px 16px #17352c08
-}
+.card{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:16px;margin:12px 0;box-shadow:0 4px 16px #17352c08}
 h2{font-size:18px;margin:0 0 12px}
 .sub{font-size:12px;color:var(--muted);line-height:1.7;margin:-4px 0 12px}
 .row{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
 .between{justify-content:space-between}
-button{
- font:inherit;font-weight:700;border:0;border-radius:11px;
- padding:12px 15px;cursor:pointer;background:var(--green);color:white
-}
+button{font:inherit;font-weight:700;border:0;border-radius:11px;padding:12px 15px;cursor:pointer;background:var(--green);color:white}
 button.light{background:#edf2ef;color:#28423a}
 button.red{background:#fff0ef;color:var(--red)}
 button:disabled{opacity:.4}
-input{
- font:inherit;border:1px solid #d5e0da;border-radius:10px;
- padding:11px;background:#fff;color:var(--ink);min-width:0
-}
+input{font:inherit;border:1px solid #d5e0da;border-radius:10px;padding:11px;background:#fff;color:var(--ink);min-width:0}
 input:focus{outline:2px solid #a5d5bd;border-color:var(--green)}
 .players{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
 .player-input label{display:block;font-size:11px;color:var(--muted);margin:0 0 4px}
 .player-input input{width:100%}
 table{width:100%;border-collapse:collapse}
-th,td{
- padding:10px 7px;border-bottom:1px solid var(--line);
- text-align:center;font-size:13px
-}
+th,td{padding:10px 7px;border-bottom:1px solid var(--line);text-align:center;font-size:13px}
 th{font-size:11px;color:var(--muted);font-weight:700;background:#f8faf9}
 td:first-child,th:first-child{text-align:right}
 .scroll{overflow-x:auto}
 .phase{font-weight:800;color:var(--green);white-space:nowrap}
-.points{width:90px;text-align:center;padding:9px}
-.pill{
- display:inline-block;padding:4px 8px;border-radius:30px;
- font-size:11px;font-weight:700;background:#eef2f0;color:#4a6259
-}
+.points{width:110px;max-width:100%;text-align:center;padding:12px 8px;border:2px solid #b9d9f5;border-radius:13px;background:linear-gradient(180deg,#fff,#f0f8ff);color:#0753a9;font-size:19px;font-weight:900;box-shadow:inset 0 2px 4px #174c8b0a}
+.points:focus{outline:3px solid #b9e5ff;border-color:#0878df}
+.pill{display:inline-block;padding:4px 8px;border-radius:30px;font-size:11px;font-weight:700;background:#eef2f0;color:#4a6259}
 .ok{background:var(--green2);color:var(--green)}
 .stay{background:#fff0ef;color:var(--red)}
 .player-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
-.player-card{
- border:1px solid var(--line);border-radius:13px;
- padding:11px;background:#fff
-}
+.player-card{border:2px solid #dce8f7;border-radius:17px;padding:13px;background:linear-gradient(145deg,#fff,#f1f8ff);box-shadow:0 4px 12px #174c8b12;transition:transform .15s ease,box-shadow .15s ease}
+.player-card .name{font-size:14px;font-weight:900;color:#173d79}
+.player-card .big{font-size:21px;font-weight:1000;color:#168b48;margin-top:7px}
+.player-card .small{font-size:11px;color:#65779b;margin-top:4px}
 .player-card .name{font-weight:750;overflow-wrap:anywhere}
 .player-card .big{font-size:22px;font-weight:850;color:var(--green);margin-top:3px}
 .player-card .small{font-size:11px;color:var(--muted)}
-.winner{
- background:#fff9e8;border:1px solid #f1dfaa;
- border-radius:13px;padding:13px;margin-top:12px
-}
+.winner{background:#fff9e8;border:1px solid #f1dfaa;border-radius:13px;padding:13px;margin-top:12px}
 .winner strong{color:#7b5a00}
 .empty{text-align:center;color:var(--muted);padding:18px;font-size:13px}
 details summary{cursor:pointer;font-weight:700;font-size:14px}
@@ -87,138 +83,66 @@ details summary{cursor:pointer;font-weight:700;font-size:14px}
 .home-actions{display:grid;gap:10px}
 .home-actions button{width:100%;padding:15px}
 .brand-note{text-align:center;color:var(--muted);font-size:10px;letter-spacing:1.4px;margin-top:24px}
-.archive-item{
- border:1px solid var(--line);border-radius:13px;
- padding:12px;margin:10px 0;background:#fff
-}
+.archive-item{border:1px solid var(--line);border-radius:13px;padding:12px;margin:10px 0;background:#fff}
 .archive-item h3{font-size:15px;margin:0 0 5px}
 .archive-item p{font-size:12px;color:var(--muted);margin:4px 0 10px}
 .rank-line{padding:7px 0;border-bottom:1px solid var(--line);font-size:13px}
-.rank-line:last-child{border:0}
-@media(min-width:560px){
- .players,.player-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
-}
+@media(min-width:560px){.players,.player-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
 
 /* ===== Phase 10 colorful home redesign ===== */
 :root{
  --bg:#eaf5ff;--card:#fff;--ink:#172b55;
  --muted:#65779b;--green:#168b48;--green2:#e4f8e9;
- --line:#dce8f7;--red:#e94352;--gold:#ffbf28;
+ --line:#dce8f7;--red:#e94352;--gold:#ffbf28
 }
 body{
  background:
   radial-gradient(circle at 8% 12%,#bceeff 0 5%,transparent 22%),
   radial-gradient(circle at 95% 28%,#d8f8ff 0 7%,transparent 24%),
   linear-gradient(160deg,#078be9 0%,#0870d8 38%,#f1f7ff 38.2%,#fff7e9 100%);
- background-attachment:fixed;
+ background-attachment:fixed
 }
 main{max-width:780px;padding:12px 14px 34px}
 .app-header{position:relative;text-align:center;padding:16px 8px 12px;color:#fff}
-.app-header h1{
- margin:0;font-size:clamp(42px,10vw,66px);line-height:.98;
- letter-spacing:-2px;font-weight:1000;color:#fff;
- text-shadow:0 4px 0 #073b91,0 8px 16px #002e8060;
-}
+.app-header h1{margin:0;font-size:clamp(42px,10vw,66px);line-height:.98;letter-spacing:-2px;font-weight:1000;color:#fff;text-shadow:0 4px 0 #073b91,0 8px 16px #002e8060}
 .app-header h1 b{color:#ffdf39;font-style:italic}
-.app-header p{
- display:inline-block;margin:8px 0 0;padding:3px 18px;
- border-radius:30px;background:#073b91;color:#ffe45a;
- font-size:13px;font-weight:900;letter-spacing:4px;
- box-shadow:0 4px 0 #052b69;
-}
+.app-header p{display:inline-block;margin:8px 0 0;padding:3px 18px;border-radius:30px;background:#073b91;color:#ffe45a;font-size:13px;font-weight:900;letter-spacing:4px;box-shadow:0 4px 0 #052b69}
 .logo-cards{height:42px;display:flex;justify-content:center;align-items:end;gap:5px;margin-bottom:5px}
-.mini-card{
- width:25px;height:37px;border:2px solid #fff;border-radius:7px;
- color:#fff;font-size:20px;font-weight:1000;line-height:34px;
- box-shadow:0 3px 7px #003d8c50;
-}
+.mini-card{width:25px;height:37px;border:2px solid #fff;border-radius:7px;color:#fff;font-size:20px;font-weight:1000;line-height:34px;box-shadow:0 3px 7px #003d8c50}
 .card-blue{background:#168df0;transform:rotate(-17deg)}
 .card-red{background:#f13c50;transform:rotate(-8deg)}
 .card-yellow{background:#ffbd20;color:#fff;transform:rotate(0)}
 .card-green{background:#21b94f;transform:rotate(8deg)}
 .card-purple{background:#8c4ce0;transform:rotate(17deg)}
-.home-panel{
- position:relative;isolation:isolate;overflow:hidden;
- margin:10px 0 14px;padding:22px 17px 17px;
- border:3px solid #fff;border-radius:30px;
- background:
-  radial-gradient(circle at 8% 18%,#ffffff85 0 2px,transparent 3px),
-  radial-gradient(circle at 90% 12%,#ffffff85 0 2px,transparent 3px),
-  linear-gradient(180deg,#087fe2 0%,#0759c8 49%,#fff4dc 49.2%,#ffe6b9 100%);
- box-shadow:0 12px 28px #003d8c35,inset 0 0 0 1px #ffffff75;
-}
+.home-panel{position:relative;isolation:isolate;overflow:hidden;margin:10px 0 14px;padding:22px 17px 17px;border:3px solid #fff;border-radius:30px;background:radial-gradient(circle at 8% 18%,#ffffff85 0 2px,transparent 3px),radial-gradient(circle at 90% 12%,#ffffff85 0 2px,transparent 3px),linear-gradient(180deg,#087fe2 0%,#0759c8 49%,#fff4dc 49.2%,#ffe6b9 100%);box-shadow:0 12px 28px #003d8c35,inset 0 0 0 1px #ffffff75}
 .home-intro{text-align:center;color:#fff;position:relative;z-index:1;margin:0 0 20px}
-.welcome-ribbon{
- display:inline-block;padding:7px 28px;margin:0 auto 9px;
- border-radius:12px 12px 18px 18px;background:linear-gradient(180deg,#fff36b,#ffbd24);
- color:#073b91;font-size:clamp(23px,6vw,32px);font-weight:1000;
- box-shadow:0 5px 0 #d68a08,0 8px 14px #002b7440;
- transform:rotate(-1deg);
-}
+.welcome-ribbon{display:inline-block;padding:7px 28px;margin:0 auto 9px;border-radius:12px 12px 18px 18px;background:linear-gradient(180deg,#fff36b,#ffbd24);color:#073b91;font-size:clamp(23px,6vw,32px);font-weight:1000;box-shadow:0 5px 0 #d68a08,0 8px 14px #002b7440;transform:rotate(-1deg)}
 .home-intro h2{font-size:clamp(18px,4.5vw,23px);font-weight:900;margin:8px 0 5px;color:#fff;text-shadow:0 2px 4px #003c8c70}
 .home-intro p{font-size:12px;color:#eaf7ff;margin:0;font-weight:700}
-.home-actions{
- display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
- gap:12px;position:relative;z-index:2;
-}
-.home-actions .home-tile{
- min-height:185px;width:100%;padding:16px 9px 13px;
- display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
- border:3px solid #ffffffc9;border-radius:25px;color:#fff;
- box-shadow:0 8px 0 #073a8d65,0 13px 18px #002f7940,inset 0 3px 5px #ffffff85;
- text-shadow:0 2px 3px #002c7060;
- transition:transform .15s ease,filter .15s ease;
-}
+.home-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;position:relative;z-index:2}
+.home-actions .home-tile{min-height:185px;width:100%;padding:16px 9px 13px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;border:3px solid #ffffffc9;border-radius:25px;color:#fff;box-shadow:0 8px 0 #073a8d65,0 13px 18px #002f7940,inset 0 3px 5px #ffffff85;text-shadow:0 2px 3px #002c7060;transition:transform .15s ease,filter .15s ease}
 .home-actions .home-tile:active{transform:translateY(4px);filter:brightness(.96);box-shadow:0 4px 0 #073a8d65,0 8px 12px #002f7940}
 .tile-history{background:linear-gradient(145deg,#df5cff,#8c24df 72%,#6415ba)!important}
 .tile-new{background:linear-gradient(145deg,#a8f52b,#43d20e 60%,#19a944)!important}
 .tile-continue{background:linear-gradient(145deg,#ffb52f,#ff741b 65%,#ed4b13)!important}
-.tile-icon{
- display:grid;place-items:center;width:72px;height:72px;border-radius:50%;
- background:linear-gradient(145deg,#fff,#dcecff);color:#0753a9;
- border:4px solid #ffffffc9;font-size:35px;font-weight:1000;
- box-shadow:0 5px 0 #003b8d55,inset 0 2px 5px #fff;
- text-shadow:none;
-}
+.tile-icon{display:grid;place-items:center;width:72px;height:72px;border-radius:50%;background:linear-gradient(145deg,#fff,#dcecff);color:#0753a9;border:4px solid #ffffffc9;font-size:35px;font-weight:1000;box-shadow:0 5px 0 #003b8d55,inset 0 2px 5px #fff;text-shadow:none}
 .tile-history .tile-icon{color:#8c24df}
 .tile-new .tile-icon{color:#15933a}
 .tile-continue .tile-icon{color:#e85b12}
 .tile-label{font-size:clamp(14px,3.4vw,18px);font-weight:1000;line-height:1.35}
-.tile-arrow{
- width:30px;height:30px;border-radius:50%;display:grid;place-items:center;
- background:#002d7a45;border:1px solid #ffffff80;font-size:25px;line-height:20px;
-}
-.backup-tools{
- position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;
- gap:10px;margin:24px auto 4px;max-width:560px;
-}
-.backup-button{
- min-height:48px;padding:9px 10px;border-radius:16px;
- border:2px solid #ffffffd9;font-size:12px;font-weight:900;
- color:#073b83;background:linear-gradient(180deg,#d9f8ff,#8be4f5);
- box-shadow:0 4px 0 #0875b5,0 7px 12px #003c8030;
-}
+.tile-arrow{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:#002d7a45;border:1px solid #ffffff80;font-size:25px;line-height:20px}
+.backup-tools{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:24px auto 4px;max-width:560px}
+.backup-button{min-height:48px;padding:9px 10px;border-radius:16px;border:2px solid #ffffffd9;font-size:12px;font-weight:900;color:#073b83;background:linear-gradient(180deg,#d9f8ff,#8be4f5);box-shadow:0 4px 0 #0875b5,0 7px 12px #003c8030}
 .backup-button span{font-size:20px;vertical-align:middle;margin-left:5px}
 .backup-import{background:linear-gradient(180deg,#e5ffdc,#a7f0bd);box-shadow:0 4px 0 #299c60,0 7px 12px #003c8030}
-.home-card-fan{
- display:flex;justify-content:center;align-items:end;gap:5px;
- height:66px;margin:13px auto 0;position:relative;z-index:1;
-}
-.fan-card{
- display:grid;place-items:center;width:40px;height:57px;border:3px solid #fff;
- border-radius:8px;color:#fff;font-size:28px;font-weight:1000;
- box-shadow:0 3px 8px #174c8b50;text-shadow:0 2px 3px #0003;
-}
+.home-card-fan{display:flex;justify-content:center;align-items:end;gap:5px;height:66px;margin:13px auto 0;position:relative;z-index:1}
+.fan-card{display:grid;place-items:center;width:40px;height:57px;border:3px solid #fff;border-radius:8px;color:#fff;font-size:28px;font-weight:1000;box-shadow:0 3px 8px #174c8b50;text-shadow:0 2px 3px #0003}
 .fan-one{background:#168df0;transform:rotate(-19deg) translateY(4px)}
 .fan-two{background:#f13c50;transform:rotate(-9deg) translateY(-2px)}
 .fan-three{background:#ffbd20;transform:translateY(-7px)}
 .fan-four{background:#21b94f;transform:rotate(9deg) translateY(-2px)}
 .fan-five{background:#8c4ce0;transform:rotate(19deg) translateY(4px)}
-.brand-note{
- display:flex;justify-content:center;align-items:center;gap:6px;flex-wrap:wrap;
- margin:15px 0 0;padding-top:12px;border-top:1px solid #ffffff70;
- color:#244a85;font-size:10px;letter-spacing:.3px;font-weight:700;
-}
+.brand-note{direction:ltr;unicode-bidi:isolate;display:flex;justify-content:center;align-items:center;gap:6px;flex-wrap:wrap;margin:15px 0 0;padding-top:12px;border-top:1px solid #ffffff70;color:#244a85;font-size:10px;letter-spacing:.3px;font-weight:700}
 .brand-note strong{font-size:13px;letter-spacing:2px;color:#073b91}
 .brand-note i{color:#f3a900;font-style:normal}
 .home-sparkle{position:absolute;color:#fff8a8;font-size:28px;text-shadow:0 0 12px #fff;z-index:0}
@@ -231,11 +155,7 @@ main{max-width:780px;padding:12px 14px 34px}
  .app-header{padding:10px 6px 9px}
  .home-panel{padding:19px 13px 14px;border-radius:25px}
  .home-actions{grid-template-columns:1fr;gap:10px}
- .home-actions .home-tile{
-  min-height:100px;display:grid;
-  grid-template-columns:76px 1fr 32px;grid-template-rows:1fr;
-  justify-items:center;gap:8px;padding:10px 13px;border-radius:21px;
- }
+ .home-actions .home-tile{min-height:100px;display:grid;grid-template-columns:76px 1fr 32px;grid-template-rows:1fr;justify-items:center;gap:8px;padding:10px 13px;border-radius:21px}
  .tile-icon{width:62px;height:62px;font-size:30px;grid-column:1;grid-row:1}
  .tile-label{grid-column:2;grid-row:1;font-size:18px;justify-self:center}
  .tile-arrow{grid-column:3;grid-row:1}
@@ -244,11 +164,95 @@ main{max-width:780px;padding:12px 14px 34px}
  .home-card-fan{height:56px;margin-top:10px}
  .fan-card{width:34px;height:49px;font-size:24px}
 }
-@media(min-width:521px){
- .home-panel{padding:25px 22px 18px}
- .home-actions .home-tile{min-height:195px}
+@media(min-width:521px){.home-panel{padding:25px 22px 18px}.home-actions .home-tile{min-height:195px}}
+
+.rule-item{border:1px solid var(--line);border-radius:12px;padding:11px;margin:8px 0;background:#fff}
+.rule-item .rule-title{font-weight:850;color:#173d79}
+.rule-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}
+.rule-actions button{padding:7px 10px;font-size:12px}
+.rule-check{display:flex;align-items:center;gap:8px;padding:8px;border-bottom:1px solid var(--line)}
+
+/* ===== PHASE 10 vertical race track ===== */
+.race-topline{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}
+.race-kicker{font-size:9px;font-weight:1000;letter-spacing:2px;color:#70dfff}
+.race-title{font-size:clamp(25px,7vw,39px);line-height:1;margin:3px 0;color:#fff;text-shadow:0 3px 0 #063b91,0 6px 12px #002b7755;letter-spacing:-1px}
+.race-title span{display:inline-block;background:linear-gradient(180deg,#fff36c,#ffb51d);color:#603100;padding:4px 12px 6px;border-radius:10px;transform:skew(-7deg);text-shadow:none;box-shadow:0 4px 0 #cf7d0a;font-size:.72em}
+.race-round{background:linear-gradient(180deg,#fff,#d9edff);color:#07468e;border:2px solid #fff;border-radius:15px;padding:9px 12px;font-size:12px;font-weight:1000;box-shadow:0 4px 0 #06458e}
+.race-hint{font-size:12px;line-height:1.7;color:#eaf7ff;font-weight:750;margin:8px 0 12px;text-align:center}
+#game{background:linear-gradient(180deg,#087ee1,#0754b7 45%,#e7f3ff 100%);border:3px solid #fff;border-radius:25px;padding:14px 11px;box-shadow:0 12px 30px #03428a35}
+#game .sub{color:#d9efff}
+.race-board{position:relative;overflow:hidden;border:3px solid #eaf7ff;border-radius:24px;padding:10px 7px 12px;background:linear-gradient(180deg,#b9d8ff,#edf7ff 58%,#d4eaff);box-shadow:inset 0 0 0 2px #75b9f2,0 7px 18px #003d8b35}
+.race-board:before{content:"🏁";position:absolute;top:6px;left:8px;font-size:23px;z-index:3;filter:drop-shadow(0 2px 2px #456)}
+.race-track-grid{display:grid;grid-template-columns:repeat(var(--player-count,6),minmax(0,0.85fr)) minmax(0,1.7fr);gap:5px;min-height:550px;direction:ltr}
+.race-phase-axis{display:grid;grid-template-rows:repeat(10,1fr);align-items:center;gap:4px;direction:ltr}
+.race-phase-mark{height:100%;display:flex;align-items:center;justify-content:center;position:relative}
+.race-phase-mark span{display:grid;place-items:center;width:31px;height:31px;border-radius:10px;background:linear-gradient(145deg,#fff,#dbeaff);border:2px solid #fff;color:#124b91;font-size:12px;font-weight:1000;box-shadow:0 2px 4px #174c8b25}
+.race-phase-mark:first-child span{background:linear-gradient(145deg,#fff5a4,#a6ee8b);color:#155b25}
+.race-phase-mark:last-child span{background:linear-gradient(145deg,#ffe28a,#ffb52c);color:#704000}
+.race-phase-mark{
+ justify-content:flex-start;
+ gap:9px;
+ min-width:0;
+ padding:3px 7px;
+ background:linear-gradient(145deg,#ffffff,#edf5ff);
+ border:1px solid #d5e5fa;
+ border-radius:10px;
+ box-shadow:0 2px 4px #174c8b12;
 }
 
+.race-phase-mark small{
+ flex:1;
+ min-width:0;
+ font-size:11px;
+ font-weight:800;
+ color:#174477;
+ line-height:1.4;
+ direction:rtl;
+ text-align:right;
+ white-space:normal;
+ overflow-wrap:normal;
+ word-break:normal;
+}
+.race-lane{position:relative;overflow:visible;border-left:2px solid #fff9;border-right:2px solid #fff9;border-radius:17px;background:linear-gradient(180deg,#ffffffb8,color-mix(in srgb,var(--lane-color) 24%,#ffffff));box-shadow:inset 0 0 0 1px #fff8}
+.race-lane:nth-child(2n){filter:saturate(1.06)}
+.race-lane:before{content:"";position:absolute;top:4px;bottom:4px;left:50%;border-left:3px dashed #fff9;transform:translateX(-50%)}
+.race-lane:after{content:"";position:absolute;inset:0;border-radius:17px;pointer-events:none;background:linear-gradient(90deg,#ffffff20,transparent 50%,#064c9a0c)}
+.race-token{position:absolute;z-index:2;left:50%;transform:translate(-50%,-50%);width:100%;max-width:58px;display:flex;flex-direction:column;align-items:center;gap:2px;transition:top .65s cubic-bezier(.2,.8,.2,1);cursor:pointer;border:0;background:transparent;padding:0;color:#17365d}
+.race-token:disabled{cursor:default;filter:grayscale(.25)}
+.race-token-face{width:clamp(31px,8vw,47px);height:clamp(31px,8vw,47px);display:grid;place-items:center;border:2px solid #fff;border-radius:50%;background:linear-gradient(145deg,#fff,#d7ecff);font-size:clamp(19px,5.5vw,29px);box-shadow:0 3px 0 #164d91,0 5px 9px #003d8b45}
+.race-token-tag{white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis;padding:3px 5px;border-radius:9px;background:var(--lane-color);color:#fff;font-size:8px;font-weight:1000;box-shadow:0 2px 4px #003d8b40}
+.race-token.is-done .race-token-face{background:linear-gradient(145deg,#fff6b1,#ffc83f)}
+.race-player-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}
+.race-player-card{display:flex;align-items:center;gap:8px;min-width:0;text-align:right;border:2px solid var(--lane-color);border-radius:15px;padding:8px;background:linear-gradient(145deg,#fff,#edf6ff);color:#163c77;box-shadow:0 4px 8px #003d8b1c;cursor:pointer;transition:transform .15s ease,box-shadow .15s ease}
+.race-player-card:active{transform:translateY(2px)}
+.race-player-card:disabled{opacity:.75;cursor:default}
+.race-player-avatar{width:42px;height:42px;flex:0 0 42px;display:grid;place-items:center;border-radius:50%;background:linear-gradient(145deg,#fff,#dceeff);border:2px solid var(--lane-color);font-size:26px}
+.race-player-meta{min-width:0;flex:1}
+.race-player-name{font-size:12px;font-weight:1000;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.race-player-stats{font-size:10px;color:#60769a;margin-top:3px;line-height:1.5}
+.race-player-status{font-size:9px;font-weight:1000;color:#fff;background:var(--lane-color);padding:3px 6px;border-radius:8px;white-space:nowrap}
+.race-player-card.is-entered{background:linear-gradient(145deg,#eaffef,#d1f8d8)}
+.race-player-card.is-done{background:linear-gradient(145deg,#fff9d9,#ffedaa)}
+.race-actions{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-top:12px}
+.race-actions button{font-size:12px;padding:10px 12px}
+.race-actions .race-save{flex:1;background:linear-gradient(180deg,#ffe96a,#ffb51d);color:#603500;border:2px solid #fff;box-shadow:0 4px 0 #c9820a;font-weight:1000}
+.race-progress{width:100%;text-align:center;color:#fff;font-size:11px;font-weight:900;padding:5px}
+.legacy-entry{margin-top:12px;padding:10px;border:1px solid #ffffff80;border-radius:12px;background:#ffffffdd;color:#17467e}
+.legacy-entry summary{font-size:12px}
+.legacy-entry .scroll{margin-top:10px}
+.race-modal{position:fixed;inset:0;z-index:10001;background:#002c72b8;display:flex;align-items:center;justify-content:center;padding:18px}
+.race-modal-card{width:100%;max-width:340px;text-align:center;padding:22px 18px;border:3px solid #fff;border-radius:25px;background:linear-gradient(145deg,#fff,#e8f5ff);box-shadow:0 14px 40px #001e5666}
+.race-modal-avatar{font-size:54px;line-height:1.2}
+.race-modal-kicker{font-size:9px;letter-spacing:3px;color:#168be4;font-weight:1000;margin-top:4px}
+.race-modal-card h2{color:#124b91;margin:5px 0;font-size:22px}
+.race-modal-phase{display:inline-block;margin:4px auto;padding:6px 14px;border-radius:18px;background:#e2f2ff;color:#0753a9;font-weight:1000;font-size:12px}
+.race-modal-rule{font-size:12px;color:#5d7394;margin:7px 0 14px}
+.race-modal-card label{display:block;font-size:12px;font-weight:900;color:#365477;margin-bottom:7px}
+.race-modal-card input{width:100%;text-align:center;font-size:30px;font-weight:1000;color:#0753a9;border:2px solid #91cafa;border-radius:15px;padding:12px}
+.race-modal-actions{display:flex;gap:8px;margin-top:14px}
+.race-modal-actions button{flex:1}
+@media(max-width:390px){.race-track-grid{grid-template-columns:repeat(6,minmax(0,1fr)) 35px;gap:2px;min-height:500px}.race-phase-mark span{width:27px;height:27px;font-size:10px}.race-player-cards{grid-template-columns:1fr 1fr}.race-player-card{padding:6px 5px;gap:5px}.race-player-avatar{width:35px;height:35px;flex-basis:35px;font-size:22px}.race-player-name{font-size:11px}.race-player-stats{font-size:9px}.race-token-tag{font-size:7px;padding:2px 3px}}
+@media(min-width:560px){.race-track-grid{min-height:640px}.race-player-cards{grid-template-columns:repeat(3,minmax(0,1fr))}}
 </style>
 </head>
 
@@ -267,7 +271,6 @@ main{max-width:780px;padding:12px 14px 34px}
  <p>CALCULATOR</p>
 </header>
 
-<!-- الشاشة الرئيسية -->
 <section class="home-panel" id="home">
  <div class="home-sparkle sparkle-one" aria-hidden="true">✦</div>
  <div class="home-sparkle sparkle-two" aria-hidden="true">✧</div>
@@ -276,130 +279,101 @@ main{max-width:780px;padding:12px 14px 34px}
   <h2>خلّي المنافسة تبدأ!</h2>
   <p>تابع المراحل واحسب النتائج واستمتع بكل جولة</p>
  </div>
-
  <div class="home-actions">
-  <button id="showArchive" class="home-tile tile-history">
-   <span class="tile-icon" aria-hidden="true">🏆</span>
-   <span class="tile-label">سجل الألعاب</span>
-   <span class="tile-arrow" aria-hidden="true">‹</span>
-  </button>
-
-  <button id="goSetup" class="home-tile tile-new">
-   <span class="tile-icon" aria-hidden="true">▶</span>
-   <span class="tile-label">بدء لعبة جديدة</span>
-   <span class="tile-arrow" aria-hidden="true">‹</span>
-  </button>
-
-  <button id="resumeGame" class="home-tile tile-continue hidden">
-   <span class="tile-icon" aria-hidden="true">🔄</span>
-   <span class="tile-label">استكمال اللعبة</span>
-   <span class="tile-arrow" aria-hidden="true">‹</span>
-  </button>
+  <button id="showArchive" class="home-tile tile-history"><span class="tile-icon">🏆</span><span class="tile-label">سجل الألعاب</span><span class="tile-arrow">‹</span></button>
+  <button id="manageRulesHome" class="home-tile tile-history" style="background:linear-gradient(145deg,#25b9d2,#0876bd)!important"><span class="tile-icon">🎴</span><span class="tile-label">إدارة الأحكام</span><span class="tile-arrow">‹</span></button>
+  <button id="goSetup" class="home-tile tile-new"><span class="tile-icon">▶</span><span class="tile-label">بدء لعبة جديدة</span><span class="tile-arrow">‹</span></button>
+  <button id="resumeGame" class="home-tile tile-continue hidden"><span class="tile-icon">🔄</span><span class="tile-label">استكمال اللعبة</span><span class="tile-arrow">‹</span></button>
  </div>
-
  <div class="backup-tools">
-  <button id="exportBackup" class="backup-button backup-export">
-   <span aria-hidden="true">⤴</span> تصدير نسخة احتياطية
-  </button>
-  <button id="importBackup" class="backup-button backup-import">
-   <span aria-hidden="true">⤓</span> استيراد نسخة احتياطية
-  </button>
+  <button id="exportBackup" class="backup-button backup-export"><span>⤴</span> تصدير نسخة احتياطية</button>
+  <button id="importBackup" class="backup-button backup-import"><span>⤓</span> استيراد نسخة احتياطية</button>
  </div>
-
  <input type="file" id="backupFile" accept=".json" style="display:none">
-
  <div class="home-card-fan" aria-hidden="true">
-  <span class="fan-card fan-one">1</span>
-  <span class="fan-card fan-two">2</span>
-  <span class="fan-card fan-three">3</span>
-  <span class="fan-card fan-four">4</span>
-  <span class="fan-card fan-five">5</span>
+  <span class="fan-card fan-one">1</span><span class="fan-card fan-two">2</span><span class="fan-card fan-three">3</span><span class="fan-card fan-four">4</span><span class="fan-card fan-five">5</span>
  </div>
-
- <div class="brand-note">
-  <span>Designed &amp; Developed by</span>
-  <strong>HAMID</strong>
-  <i>✦</i>
- </div>
+ <div class="brand-note"><span>Designed &amp; Developed by</span><strong>HAMID</strong><i>✦</i></div>
 </section>
 
 <!-- إعداد اللاعبين -->
 <section class="card hidden" id="setup">
- <div class="row between">
-  <h2>إعداد لعبة جديدة</h2>
-  <button class="light" id="backHome1">الرئيسية</button>
+ <div class="row between"><h2>إعداد لعبة جديدة</h2><button class="light" id="backHome1">الرئيسية</button></div>
+ <p class="sub">أدخل أسماء من 2 إلى 6 لاعبين، واختر شخصية لكل لاعب. يبدأ الجميع من المرحلة الأولى.</p>
+ <div style="margin-bottom:14px">
+  <label for="playerCount" style="display:block;font-size:13px;font-weight:700;margin-bottom:7px">اختر عدد اللاعبين أولاً</label>
+  <select id="playerCount" style="width:100%;font:inherit;padding:12px;border:1px solid #d5e0da;border-radius:10px;background:white">
+   <option value="">اختر عدد اللاعبين</option>
+   <option value="2">2 لاعبين</option><option value="3">3 لاعبين</option><option value="4">4 لاعبين</option><option value="5">5 لاعبين</option><option value="6">6 لاعبين</option>
+  </select>
  </div>
- <p class="sub">أدخل أسماء من لاعبين إلى 8 لاعبين. يبدأ الجميع من المرحلة الأولى.</p>
+ <div class="players" id="nameFields"></div>
 
-<div style="margin-bottom:14px">
- <label for="playerCount" style="display:block;font-size:13px;font-weight:700;margin-bottom:7px">
-  اختر عدد اللاعبين أولاً
- </label>
- <select id="playerCount" style="width:100%;font:inherit;padding:12px;border:1px solid #d5e0da;border-radius:10px;background:white">
-  <option value="">اختر عدد اللاعبين</option>
-  <option value="2">2 لاعبين</option>
-  <option value="3">3 لاعبين</option>
-  <option value="4">4 لاعبين</option>
-  <option value="5">5 لاعبين</option>
-  <option value="6">6 لاعبين</option>
-  <option value="7">7 لاعبين</option>
-  <option value="8">8 لاعبين</option>
- </select>
-</div>
+ <!-- اختيار طريقة اللعب: تلقائي / يدوي / بدون أحكام -->
+ <div class="card" style="margin:14px 0;padding:13px;background:#f7fbff">
+  <h2 style="font-size:15px">طريقة اللعب</h2>
+  <div style="display:grid;gap:12px">
+   <label><input type="radio" name="ruleMode" value="auto" checked> 🎴 بالأحكام – اختيار تلقائي</label>
+   <label><input type="radio" name="ruleMode" value="manual"> 🎯 بالأحكام – اختيار يدوي</label>
+   <label><input type="radio" name="ruleMode" value="none"> 🚀 بدون أحكام – تسجيل النقاط مباشرة</label>
+  </div>
+  <p class="sub" style="margin-top:10px">يمكنك اللعب بالأحكام أو بدونها. في جميع الحالات، التقدم يعتمد على نقاط اللاعب.</p>
+  <div id="manualRulePicker" class="hidden"></div>
+ </div>
 
-<div class="players" id="nameFields"></div>
+ <div class="row" style="margin-top:12px"><button id="startGame" disabled>بدء اللعبة</button></div>
+</section>
 
-<div class="row" style="margin-top:12px">
- <button id="startGame" disabled>بدء اللعبة</button>
-</div>
-
+<!-- إدارة مكتبة الأحكام -->
+<section class="card hidden" id="rulesManager">
+ <div class="row between"><h2 style="margin:0">إدارة مكتبة الأحكام</h2><button class="light" id="backHomeRules">الرئيسية</button></div>
+ <p class="sub">أضف الأحكام أو عدّلها أو احذفها. تُحفظ التغييرات على هذا الجهاز تلقائيًا.</p>
+ <div class="card" style="background:#f7fbff">
+  <h2 style="font-size:15px" id="ruleFormTitle">إضافة حكم جديد</h2>
+  <input id="ruleName" placeholder="اسم الحكم (مثال: Run 4 + Set 3)" style="width:100%;margin-bottom:8px">
+  <div class="row">
+   <select id="ruleLevel" style="flex:1;padding:11px;border:1px solid #d5e0da;border-radius:10px;font:inherit;background:white">
+    <option value="سهل">سهل</option><option value="متوسط">متوسط</option><option value="فوق المتوسط">فوق المتوسط</option><option value="صعب">صعب</option><option value="صعب جدًا">صعب جدًا</option>
+   </select>
+   <input id="ruleCards" type="number" min="1" max="10" placeholder="عدد الورقات" style="width:115px">
+  </div>
+  <div class="row" style="margin-top:9px"><button id="saveRule">إضافة الحكم</button><button id="cancelRuleEdit" class="light hidden">إلغاء التعديل</button></div>
+ </div>
+ <div id="rulesStats" class="row" style="gap:6px;margin:10px 0;flex-wrap:wrap"></div>
+ <div id="rulesList"></div>
 </section>
 
 <!-- تسجيل الجولة -->
 <section class="card hidden" id="game">
- <div class="row between">
-  <h2 style="margin:0">تسجيل الجولة</h2>
-  <span class="pill" id="roundNo">الجولة 1</span>
+ <div class="race-topline">
+  <div><div class="race-kicker">THE GREAT CARD ADVENTURE</div><h2 class="race-title">PHASE 10 <span>RACE</span></h2></div>
+  <div class="race-round" id="roundNo">الجولة 1</div>
  </div>
- <p class="sub">
-  أدخل نقاط الكروت المتبقية للاعبين الذين ما زالوا في اللعبة فقط.
-  اللاعب الذي ينهي Phase 10 يخرج من الجولات التالية.
- </p>
- <div class="scroll">
-  <table>
-   <thead>
-    <tr><th>اللاعب</th><th>المرحلة</th><th>نقاط الجولة</th></tr>
-   </thead>
-   <tbody id="scoreInputs"></tbody>
-  </table>
+ <p class="race-hint">اضغط على بطاقة كل لاعب لتسجيل نقاطه. كلما اجتاز المرحلة، تتحرك شخصيته تلقائيًا إلى المرحلة التالية!</p>
+ <div id="raceTrack" class="race-board"></div>
+ <div class="race-actions">
+  <div class="race-progress" id="raceProgress">تم تسجيل 0 من 0 لاعبين</div>
+  <button id="saveRound" class="race-save">اعتماد الجولة ✨</button>
+  <button class="light" id="undo" disabled>↶ تراجع</button>
+  <button class="red" id="endGame">إنهاء اللعبة</button>
  </div>
- <div class="row" style="margin-top:13px">
-  <button id="saveRound">اعتماد الجولة</button>
-  <button class="light" id="undo" disabled>تراجع</button>
-  <button class="red" id="endGame">إنهاء اللعبة وحفظها</button>
- </div>
- <p class="sub" style="margin:12px 0 0">
-  أقل من 50 نقطة: يتقدم اللاعب مرحلة واحدة.
-  عند إكمال Phase 10 بنجاح ينتهي دوره في اللعبة.
- </p>
+ <details class="legacy-entry">
+  <summary>إدخال النتائج بالطريقة التقليدية</summary>
+  <div class="scroll"><table><thead><tr><th>اللاعب</th><th>المرحلة</th><th>حكم المرحلة</th><th>نقاط الجولة</th></tr></thead><tbody id="scoreInputs"></tbody></table></div>
+ </details>
+ <p class="sub" style="margin:12px 0 0">أقل من 50 نقطة: يتقدم اللاعب مرحلة واحدة. عند إكمال Phase 10 بنجاح ينتهي دوره في اللعبة.</p>
 </section>
 
 <!-- الترتيب -->
 <section class="card hidden" id="standings">
- <div class="row between">
-  <h2 style="margin:0">ترتيب اللاعبين</h2>
-  <span class="pill" id="roundCount">0 جولة</span>
- </div>
+ <div class="row between"><h2 style="margin:0">ترتيب اللاعبين</h2><span class="pill" id="roundCount">0 جولة</span></div>
  <div class="player-grid" id="playerCards" style="margin-top:12px"></div>
  <div id="winner"></div>
 </section>
 
 <!-- سجل الجولات -->
 <section class="card hidden" id="historySection">
- <div class="row between">
-  <h2 style="margin:0">سجل جولات اللعبة</h2>
-  <button class="light" id="backHome2">الرئيسية</button>
- </div>
+ <div class="row between"><h2 style="margin:0">سجل جولات اللعبة</h2><button class="light" id="backHome2">الرئيسية</button></div>
  <div id="historyList"></div>
 </section>
 
@@ -407,101 +381,63 @@ main{max-width:780px;padding:12px 14px 34px}
 <section class="card hidden" id="archive">
  <div class="row between">
   <h2 style="margin:0">سجل الألعاب السابقة</h2>
-
-<div class="row">
- <button class="red" id="clearArchive"
-  style="padding:8px 11px;font-size:12px">
-  🗑️ مسح الكل
- </button>
-
- <button class="light" id="backHome3">الرئيسية</button>
-</div>
+  <div class="row">
+   <button class="red" id="clearArchive" style="padding:8px 11px;font-size:12px">🗑️ مسح الكل</button>
+   <button class="light" id="backHome3">الرئيسية</button>
+  </div>
  </div>
  <div id="archiveList"></div>
 </section>
+
+<!-- نافذة تسجيل نتيجة اللاعب -->
+<div id="trackScoreModal" class="hidden race-modal">
+ <div class="race-modal-card">
+  <div class="race-modal-avatar" id="trackModalAvatar">🧸</div>
+  <div class="race-modal-kicker">ROUND SCORE</div>
+  <h2 id="trackModalName">اسم اللاعب</h2>
+  <p id="trackModalPhase" class="race-modal-phase">Phase 1</p>
+  <p id="trackModalRule" class="race-modal-rule">الحكم المطلوب</p>
+  <label for="trackScoreValue">النقاط المتبقية مع اللاعب</label>
+  <input id="trackScoreValue" type="number" min="0" step="5" inputmode="numeric" placeholder="0">
+  <div class="race-modal-actions"><button id="trackScoreCancel" class="light">إلغاء</button><button id="trackScoreSave">حفظ النتيجة</button></div>
+ </div>
+</div>
+
+<!-- نافذة اعتماد الجولة -->
+<div id="roundSuccessModal" class="hidden" style="position:fixed;inset:0;background:#003b8c99;z-index:9998;display:flex;align-items:center;justify-content:center;padding:20px">
+ <div style="width:100%;max-width:360px;padding:25px 20px;border:3px solid white;border-radius:24px;background:linear-gradient(145deg,#ffffff,#eaf6ff);box-shadow:0 12px 40px #002b6655;text-align:center">
+  <div style="font-size:48px">🎉</div>
+  <h2 style="color:#168b48;margin:10px 0">تم اعتماد الجولة بنجاح!</h2>
+  <p id="roundSuccessMessage" style="color:#65779b;font-size:14px;font-weight:700"></p>
+  <div id="nextRoundNumber" style="margin:18px 0;padding:13px;border-radius:15px;background:linear-gradient(135deg,#087fe2,#0753a9);color:white;font-size:24px;font-weight:1000"></div>
+  <button id="continueNextRound" style="width:100%">يلا نبدأ الجولة الجديدة 🚀</button>
+ </div>
+</div>
+
 <!-- نافذة خيارات إنهاء اللعبة -->
-<div id="endModal" class="hidden" style="
- position:fixed;
- inset:0;
- background:#0009;
- z-index:9999;
- display:flex;
- align-items:center;
- justify-content:center;
- padding:20px
-">
- <div style="
-  background:white;
-  width:100%;
-  max-width:380px;
-  border-radius:20px;
-  padding:22px;
-  box-shadow:0 10px 40px #0003
- ">
-  <h2 style="text-align:center;margin-bottom:8px">
-   إنهاء اللعبة
-  </h2>
-
-  <p class="sub" style="text-align:center;margin-bottom:20px">
-   اختر ماذا تريد أن تفعل باللعبة الحالية
-  </p>
-
+<div id="endModal" class="hidden" style="position:fixed;inset:0;background:#0009;z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px">
+ <div style="background:white;width:100%;max-width:380px;border-radius:20px;padding:22px;box-shadow:0 10px 40px #0003">
+  <h2 style="text-align:center;margin-bottom:8px">إنهاء اللعبة</h2>
+  <p class="sub" style="text-align:center;margin-bottom:20px">اختر ماذا تريد أن تفعل باللعبة الحالية</p>
   <div style="display:grid;gap:10px">
-   <button id="deleteGameOption" class="red">
-    🗑️ إنهاء بدون حفظ
-   </button>
-
-   <button id="saveGameOption">
-    💾 إنهاء وحفظ في الأرشيف
-   </button>
-
-   <button id="pauseGameOption" class="light">
-    ⏸️ إيقاف مؤقت واستكمال لاحقاً
-   </button>
-
-   <button id="cancelEndModal" class="light">
-    إلغاء
-   </button>
+   <button id="deleteGameOption" class="red">🗑️ إنهاء بدون حفظ</button>
+   <button id="saveGameOption">💾 إنهاء وحفظ في الأرشيف</button>
+   <button id="pauseGameOption" class="light">⏸️ إيقاف مؤقت واستكمال لاحقاً</button>
+   <button id="cancelEndModal" class="light">إلغاء</button>
   </div>
  </div>
 </div>
+
 <!-- نافذة التأكيد الموحدة -->
-<div id="confirmModal" class="hidden" style="
- position:fixed;
- inset:0;
- background:#0009;
- z-index:10000;
- display:flex;
- align-items:center;
- justify-content:center;
- padding:20px
-">
- <div style="
-  background:white;
-  width:100%;
-  max-width:380px;
-  border-radius:20px;
-  padding:22px;
-  box-shadow:0 10px 40px #0003
- ">
-  <h2 id="confirmTitle" style="text-align:center;margin-bottom:10px">
-   تأكيد العملية
-  </h2>
-
-  <p id="confirmMessage" class="sub" style="text-align:center;margin-bottom:22px">
-   هل أنت متأكد؟
-  </p>
-
-  <div class="row">
-   <button id="confirmYes" class="red">تأكيد</button>
-   <button id="confirmNo" class="light">إلغاء</button>
-  </div>
+<div id="confirmModal" class="hidden" style="position:fixed;inset:0;background:#0009;z-index:10000;display:flex;align-items:center;justify-content:center;padding:20px">
+ <div style="background:white;width:100%;max-width:380px;border-radius:20px;padding:22px;box-shadow:0 10px 40px #0003">
+  <h2 id="confirmTitle" style="text-align:center;margin-bottom:10px">تأكيد العملية</h2>
+  <p id="confirmMessage" class="sub" style="text-align:center;margin-bottom:22px">هل أنت متأكد؟</p>
+  <div class="row"><button id="confirmYes" class="red">تأكيد</button><button id="confirmNo" class="light">إلغاء</button></div>
  </div>
 </div>
-<div class="footer">
- تُحفظ اللعبة الحالية والأرشيف تلقائياً على هذا الجهاز وفي هذا المتصفح.
-</div>
 
+<div class="footer">تُحفظ اللعبة الحالية والأرشيف تلقائياً على هذا الجهاز وفي هذا المتصفح.</div>
 </main>
 
 <script>
@@ -514,551 +450,325 @@ function showConfirm(title,message,onConfirm){
  confirmCallback=onConfirm;
  $('confirmModal').classList.remove('hidden');
 }
-
 $('confirmNo').onclick=()=>{
  $('confirmModal').classList.add('hidden');
  confirmCallback=null;
 };
-
 $('confirmYes').onclick=()=>{
  $('confirmModal').classList.add('hidden');
-
- if(confirmCallback){
-  const action=confirmCallback;
-  confirmCallback=null;
-  action();
- }
+ if(confirmCallback){const action=confirmCallback;confirmCallback=null;action();}
 };
 
 const CURRENT_KEY='phase10_current_v2';
 const ARCHIVE_KEY='phase10_archive_v2';
 const NAMES_KEY='phase10_names_v2';
+const RULES_KEY='phase10_rules_v1';
 
 let state=null;
 let archive=[];
+let rules=read(RULES_KEY,[]);
+let editingRuleId=null;
 
 function read(key,fallback){
- try{
-  const x=JSON.parse(localStorage.getItem(key));
-  return x??fallback;
- }catch(e){return fallback}
+ try{const x=JSON.parse(localStorage.getItem(key));return x??fallback;}
+ catch(e){return fallback;}
 }
-
 function saveCurrent(){
- try{
-  if(state)localStorage.setItem(CURRENT_KEY,JSON.stringify(state));
-  else localStorage.removeItem(CURRENT_KEY);
- }catch(e){alert('تعذر حفظ البيانات في المتصفح.')}
+ try{if(state)localStorage.setItem(CURRENT_KEY,JSON.stringify(state));else localStorage.removeItem(CURRENT_KEY);}
+ catch(e){alert('تعذر حفظ البيانات في المتصفح.');}
 }
-
 function saveArchive(){
- try{
-  localStorage.setItem(ARCHIVE_KEY,JSON.stringify(archive));
- }catch(e){alert('تعذر حفظ سجل الألعاب.')}
+ try{localStorage.setItem(ARCHIVE_KEY,JSON.stringify(archive));}
+ catch(e){alert('تعذر حفظ سجل الألعاب.');}
 }
-
 function esc(s){
- return String(s??'').replace(/[&<>"']/g,c=>({
-  '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
- }[c]));
+ return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
-
 function show(id){
- const visible = id === 'game'
-  ? ['game','standings','historySection']
-  : [id];
-
- ['home','setup','game','standings','historySection','archive']
- .forEach(x=>$(x).classList.toggle('hidden',!visible.includes(x)));
+ const visible=id==='game'?['game','standings','historySection']:[id];
+ ['home','setup','rulesManager','game','standings','historySection','archive'].forEach(x=>$(x).classList.toggle('hidden',!visible.includes(x)));
 }
-
-function activePlayers(){
- return state.players.filter(p=>!p.completed);
-}
-
+function activePlayers(){return state.players.filter(p=>!p.completed);}
 function totals(){
- return state.players.map(p=>({
-  ...p,
-  total:state.rounds.reduce((s,r)=>s+(r.scores[p.id]??0),0),
-  last:state.rounds.length
-   ?(state.rounds[state.rounds.length-1].scores[p.id]??'—')
-   :'—'
- }));
+ return state.players.map(p=>({...p,total:state.rounds.reduce((s,r)=>s+(r.scores[p.id]??0),0),last:state.rounds.length?(state.rounds[state.rounds.length-1].scores[p.id]??'—'):'—'}));
 }
 
 /* إعادة حساب المراحل وحالة الإنهاء من سجل الجولات */
-
 function rebuild(){
- state.players=state.names.map((name,id)=>({
-  id,name,phase:1,completed:false,finishRound:null,finishOrder:null
- }));
-
+ const savedCharacters=new Map((state.players||[]).map(p=>[p.id,p.character]));
+ state.players=state.names.map((name,id)=>({id,name,character:savedCharacters.get(id)||['lion','rabbit','bear','panda','fox','tiger'][id%6],phase:1,completed:false,finishRound:null,finishOrder:null}));
  state.rounds.forEach((r,index)=>{
   const newly=[];
-
   state.players.forEach(p=>{
    if(p.completed||!Object.prototype.hasOwnProperty.call(r.scores,p.id))return;
-
    const score=Number(r.scores[p.id]);
-
-   if(p.phase===10&&score<50){
-    p.completed=true;
-    p.finishRound=index+1;
-    newly.push(p);
-   }else if(p.phase<10&&score<50){
-    p.phase++;
-   }
+   if(p.phase===10&&score<50){p.completed=true;p.finishRound=index+1;newly.push(p);}
+   else if(p.phase<10&&score<50){p.phase++;}
   });
-
   if(newly.length){
-   const sums=state.players.map(p=>({
-    id:p.id,
-    total:state.rounds.slice(0,index+1).reduce(
-     (sum,round)=>sum+(round.scores[p.id]??0),0
-    )
-   }));
-
-   newly.sort((a,b)=>
-    sums.find(x=>x.id===a.id).total-
-    sums.find(x=>x.id===b.id).total
-   );
-
-   let order=state.players.filter(
-    p=>p.completed&&p.finishRound<index+1
-   ).length+1;
-
+   const sums=state.players.map(p=>({id:p.id,total:state.rounds.slice(0,index+1).reduce((sum,round)=>sum+(round.scores[p.id]??0),0)}));
+   newly.sort((a,b)=>sums.find(x=>x.id===a.id).total-sums.find(x=>x.id===b.id).total);
+   let order=state.players.filter(p=>p.completed&&p.finishRound<index+1).length+1;
    for(let i=0;i<newly.length;){
     let j=i+1;
-
-    while(
-     j<newly.length&&
-     sums.find(x=>x.id===newly[j].id).total===
-     sums.find(x=>x.id===newly[i].id).total
-    )j++;
-
+    while(j<newly.length&&sums.find(x=>x.id===newly[j].id).total===sums.find(x=>x.id===newly[i].id).total)j++;
     newly.slice(i,j).forEach(p=>p.finishOrder=order);
-    order+=j-i;
-    i=j;
+    order+=j-i;i=j;
    }
   }
  });
 }
 
-
 /* ترتيب اللاعبين */
 function ranking(){
  const all=totals();
-
  return all.sort((a,b)=>{
-  if(a.completed&&b.completed)
-   return a.finishOrder-b.finishOrder||a.total-b.total;
-
+  if(a.completed&&b.completed)return a.finishOrder-b.finishOrder||a.total-b.total;
   if(a.completed)return -1;
   if(b.completed)return 1;
-
-  return b.phase-a.phase||a.total-b.total||
-   a.name.localeCompare(b.name);
+  return b.phase-a.phase||a.total-b.total||a.name.localeCompare(b.name);
  });
 }
 
+/* مكتبة الأحكام */
+function saveRules(){localStorage.setItem(RULES_KEY,JSON.stringify(rules));}
+function ruleCounts(){return ['سهل','متوسط','فوق المتوسط','صعب','صعب جدًا'].map(level=>({level,count:rules.filter(r=>r.level===level).length}));}
+function renderRules(){
+ $('rulesStats').innerHTML=ruleCounts().map(x=>`<span class="pill">${x.level}: ${x.count}</span>`).join('')+`<span class="pill ok">الإجمالي: ${rules.length}</span>`;
+ $('rulesList').innerHTML=rules.length?rules.map(r=>`<div class="rule-item"><div class="row between"><span class="rule-title">${esc(r.name)}</span><span class="pill">${esc(r.level)} · ${r.cards} ورقات</span></div><div class="rule-actions"><button class="light" data-edit-rule="${r.id}">تعديل</button><button class="red" data-delete-rule="${r.id}">حذف</button></div></div>`).join(''):'<div class="empty">لا توجد أحكام بعد. أضف أول حكم من النموذج أعلاه.</div>';
+ document.querySelectorAll('[data-edit-rule]').forEach(b=>b.onclick=()=>{
+  const r=rules.find(x=>x.id===b.dataset.editRule);if(!r)return;
+  editingRuleId=r.id;$('ruleName').value=r.name;$('ruleLevel').value=r.level;$('ruleCards').value=r.cards;$('ruleFormTitle').textContent='تعديل الحكم';$('saveRule').textContent='حفظ التعديل';$('cancelRuleEdit').classList.remove('hidden');$('ruleName').focus();
+ });
+ document.querySelectorAll('[data-delete-rule]').forEach(b=>b.onclick=()=>{
+  const r=rules.find(x=>x.id===b.dataset.deleteRule);if(!r)return;
+  showConfirm('حذف الحكم',`هل تريد حذف الحكم «${r.name}» من المكتبة؟ لن تتغير الألعاب المحفوظة سابقًا.`,()=>{
+   rules=rules.filter(x=>x.id!==r.id);saveRules();renderRules();renderManualRulePicker();
+  });
+ });
+}
+function resetRuleForm(){
+ editingRuleId=null;$('ruleName').value='';$('ruleCards').value='';$('ruleLevel').value='سهل';$('ruleFormTitle').textContent='إضافة حكم جديد';$('saveRule').textContent='إضافة الحكم';$('cancelRuleEdit').classList.add('hidden');
+}
+function renderManualRulePicker(){
+ const box=$('manualRulePicker');if(!box)return;
+ if(document.querySelector('input[name="ruleMode"]:checked')?.value!=='manual'){box.classList.add('hidden');box.innerHTML='';return;}
+ box.classList.remove('hidden');
+ box.innerHTML=rules.length?`<p class="sub">حدد 10 أحكام بالضبط (${rules.length} متاح).</p>`+rules.map(r=>`<label class="rule-check"><input type="checkbox" value="${r.id}" class="manual-rule-choice"> <span>${esc(r.name)} <small>(${esc(r.level)} · ${r.cards})</small></span></label>`).join(''):'<div class="empty">أضف أحكامًا أولًا من شاشة إدارة الأحكام.</div>';
+}
+$('saveRule').onclick=()=>{
+ const name=$('ruleName').value.trim(),level=$('ruleLevel').value,cards=Number($('ruleCards').value);
+ if(!name||!Number.isInteger(cards)||cards<1||cards>10){showConfirm('بيانات الحكم','اكتب اسم الحكم وحدد عدد الورقات من 1 إلى 10.',()=>{});return;}
+ const duplicate=rules.some(r=>r.id!==editingRuleId&&r.name.trim().toLowerCase()===name.toLowerCase());
+ if(duplicate){showConfirm('حكم مكرر','هذا الحكم موجود بالفعل في المكتبة.',()=>{});return;}
+ if(editingRuleId){const r=rules.find(x=>x.id===editingRuleId);if(r)Object.assign(r,{name,level,cards});}
+ else{rules.push({id:'r'+Date.now()+Math.random().toString(16).slice(2,6),name,level,cards});}
+ saveRules();resetRuleForm();renderRules();renderManualRulePicker();
+};
+$('cancelRuleEdit').onclick=resetRuleForm;
+$('manageRulesHome').onclick=()=>{renderRules();show('rulesManager');};
+$('backHomeRules').onclick=()=>show('home');
+document.querySelectorAll('input[name="ruleMode"]').forEach(x=>x.onchange=renderManualRulePicker);
+
 /* تجهيز خانات الأسماء */
-
-
 function renderNames(){
  const names=read(NAMES_KEY,[]);
  const box=$('nameFields');
-
- const oldValues=[...box.querySelectorAll('input[data-name]')]
-  .map(x=>x.value);
-
+ const oldValues=[...box.querySelectorAll('input[data-name]')].map(x=>x.value);
+ const oldCharacters=[...box.querySelectorAll('select[data-character]')].map(x=>x.value);
  const count=Number($('playerCount').value);
-
- box.innerHTML='';
- $('startGame').disabled=!count;
-
+ const characterOptions=[['lion','🦁 الأسد'],['rabbit','🐰 الأرنب'],['bear','🧸 الدبدوب'],['panda','🐼 الباندا'],['fox','🦊 الثعلب'],['tiger','🐯 النمر']];
+ box.innerHTML='';$('startGame').disabled=!count;
  if(!count)return;
-
  for(let i=0;i<count;i++){
-  const d=document.createElement('div');
-  d.className='player-input';
-  d.innerHTML=`
-   <label>اسم اللاعب ${i+1}</label>
-   <input maxlength="24" placeholder="اسم اللاعب"
-    list="knownNames" data-name="${i}" autocomplete="off">
-  `;
+  const d=document.createElement('div');d.className='player-input';
+  d.innerHTML=`<label>اسم اللاعب ${i+1}</label><input maxlength="24" placeholder="اسم اللاعب" list="knownNames" data-name="${i}" autocomplete="off"><select data-character="${i}" aria-label="شخصية اللاعب ${i+1}" style="width:100%;margin-top:5px;padding:9px;border:1px solid #d5e0da;border-radius:10px;background:#fff;font:inherit">${characterOptions.map(c=>`<option value="${c[0]}">${c[1]}</option>`).join('')}</select>`;
   d.querySelector('input').value=oldValues[i]||'';
+  d.querySelector('select').value=oldCharacters[i]||characterOptions[i%characterOptions.length][0];
   box.append(d);
  }
-
- const dl=document.createElement('datalist');
- dl.id='knownNames';
- dl.innerHTML=names.map(n=>`<option value="${esc(n)}">`).join('');
- box.append(dl);
+ const dl=document.createElement('datalist');dl.id='knownNames';dl.innerHTML=names.map(n=>`<option value="${esc(n)}">`).join('');box.append(dl);
 }
-
-
 
 /* حفظ الأسماء السابقة للاقتراح */
 function rememberNames(names){
  let old=read(NAMES_KEY,[]);
+ names.forEach(n=>{if(!old.some(x=>x.toLocaleLowerCase()===n.toLocaleLowerCase()))old.push(n);});
+ try{localStorage.setItem(NAMES_KEY,JSON.stringify(old.slice(-100)));}catch(e){}
+}
 
- names.forEach(n=>{
-  if(!old.some(x=>x.toLocaleLowerCase()===n.toLocaleLowerCase()))
-   old.push(n);
- });
+/* شخصيات المضمار وتسجيل النقاط من البطاقات */
+const raceCharacters={lion:{emoji:'🦁',name:'الأسد'},rabbit:{emoji:'🐰',name:'الأرنب'},bear:{emoji:'🧸',name:'الدبدوب'},panda:{emoji:'🐼',name:'الباندا'},fox:{emoji:'🦊',name:'الثعلب'},tiger:{emoji:'🐯',name:'النمر'}};
+const raceColors=['#087fe2','#21a85b','#ef6a27','#8751d5','#e44c83','#0b9fa7'];
+let pendingScores={};
+let trackModalPlayerId=null;
+function playerRoundsPlayed(id){return state.rounds.filter(r=>Object.prototype.hasOwnProperty.call(r.scores,id)).length;}
 
- try{
-  localStorage.setItem(NAMES_KEY,JSON.stringify(old.slice(-100)));
- }catch(e){}
+function openTrackScore(id){
+ const p=state.players.find(x=>String(x.id)===String(id));
+ if(!p||p.completed)return;
+ trackModalPlayerId=p.id;
+ const ch=raceCharacters[p.character]||raceCharacters.bear;
+ $('trackModalAvatar').textContent=ch.emoji;
+ $('trackModalName').textContent=p.name;
+ $('trackModalPhase').textContent='Phase '+p.phase;
+
+ // عرض اسم الحكم أو توضيح أن اللعبة بدون أحكام
+ $('trackModalRule').textContent=
+  state.ruleMode==='none'
+   ?'🚀 وضع اللعب بدون أحكام'
+   :(state.selectedRules||[])[p.phase-1]?.name||'أدخل نقاط الجولة';
+
+ $('trackScoreValue').value=Object.prototype.hasOwnProperty.call(pendingScores,p.id)?pendingScores[p.id]:'';
+ $('trackScoreModal').classList.remove('hidden');
+ setTimeout(()=>$('trackScoreValue').focus(),50);
+}
+function closeTrackScore(){$('trackScoreModal').classList.add('hidden');trackModalPlayerId=null;}
+$('trackScoreCancel').onclick=closeTrackScore;
+$('trackScoreSave').onclick=()=>{
+ if(trackModalPlayerId===null)return;
+ const value=$('trackScoreValue').value.trim();
+ if(value===''||!Number.isFinite(+value)||+value<0||+value%5!==0){showConfirm('تنبيه النقاط','اكتب نقاطًا صحيحة: 0 أو 5 أو أحد مضاعفات الرقم 5.',()=>{});return;}
+ pendingScores[trackModalPlayerId]=Math.floor(+value);
+ const field=document.querySelector(`[data-score="${trackModalPlayerId}"]`);
+ if(field)field.value=pendingScores[trackModalPlayerId];
+ closeTrackScore();renderTrack();
+};
+$('trackScoreValue').addEventListener('keydown',e=>{if(e.key==='Enter')$('trackScoreSave').click();});
+
+function renderTrack(){
+ const all=state.players;
+ const active=activePlayers();
+ const total=all.length;
+$('raceTrack').style.setProperty('--player-count',total);
+ const entered=active.filter(p=>Object.prototype.hasOwnProperty.call(pendingScores,p.id)).length;
+ const phaseMarks=Array.from({length:10},(_,i)=>{
+ const phaseNumber=10-i;
+ const rule=state.selectedRules?.[phaseNumber-1];
+ return `<div class="race-phase-mark">
+  <span>${phaseNumber}</span>
+  <small>${rule?esc(rule.name):'بدون حكم'}</small>
+ </div>`;
+}).join('');
+ const lanes=all.map((p,i)=>{
+  const ch=raceCharacters[p.character]||raceCharacters.bear;
+  const top=6+((10-p.phase)/9)*88;
+  const color=raceColors[i%raceColors.length];
+  return `<div class="race-lane" style="--lane-color:${color}"><button class="race-token ${p.completed?'is-done':''}" data-race-player="${p.id}" style="top:${top}%" ${p.completed?'disabled':''} title="${esc(p.name)} - Phase ${p.phase}"><span class="race-token-face">${ch.emoji}</span><span class="race-token-tag">${p.completed?'🏆':`${esc(p.name)} · ${playerRoundsPlayed(p.id)} ج`}</span></button></div>`;
+ }).join('');
+ const cards=all.map((p,i)=>{
+  const ch=raceCharacters[p.character]||raceCharacters.bear;
+  const color=raceColors[i%raceColors.length];
+  const enteredScore=Object.prototype.hasOwnProperty.call(pendingScores,p.id);
+  const totalScore=state.rounds.reduce((sum,r)=>sum+(r.scores[p.id]??0),0);
+  return `<button class="race-player-card ${p.completed?'is-done':''} ${enteredScore?'is-entered':''}" data-race-player="${p.id}" style="--lane-color:${color}" ${p.completed?'disabled':''}><span class="race-player-avatar">${ch.emoji}</span><span class="race-player-meta"><span class="race-player-name">${esc(p.name)}</span><span class="race-player-stats">${totalScore} نقطة · ${playerRoundsPlayed(p.id)} جولة</span></span><span class="race-player-status">${p.completed?'🏆':enteredScore?'تم ✓':'إدخال'}</span></button>`;
+ }).join('');
+ $('raceTrack').innerHTML=`<div class="race-track-grid">${lanes}<div class="race-phase-axis">${phaseMarks}</div></div><div class="race-player-cards">${cards}</div>`;
+ $('raceProgress').textContent=`تم تسجيل ${entered} من ${active.length} لاعبين`;
+ $('raceTrack').querySelectorAll('[data-race-player]').forEach(el=>el.addEventListener('click',()=>openTrackScore(el.dataset.racePlayer)));
 }
 
 /* عرض اللعبة */
 function renderGame(){
  show('game');
-
  $('roundNo').textContent='الجولة '+(state.rounds.length+1);
-
  const players=activePlayers();
-
  $('scoreInputs').innerHTML=players.map(p=>`
   <tr>
    <td><b>${esc(p.name)}</b></td>
    <td class="phase">Phase ${p.phase}</td>
-   <td>
-<input class="points" type="number" min="0" step="5"
- inputmode="numeric" placeholder="0" data-score="${p.id}">
-   </td>
+   <td>${state.ruleMode==='none'?'بدون أحكام':esc((state.selectedRules||[])[p.phase-1]?.name||'—')}</td>
+   <td><input class="points" type="number" min="0" step="5" inputmode="numeric" placeholder="0" data-score="${p.id}" value="${Object.prototype.hasOwnProperty.call(pendingScores,p.id)?pendingScores[p.id]:''}"></td>
   </tr>
  `).join('');
-
- if(!players.length){
-  $('scoreInputs').innerHTML=
-   '<tr><td colspan="3">اكتمل اللاعبون جميعاً.</td></tr>';
- }
-
+ if(!players.length)$('scoreInputs').innerHTML='<tr><td colspan="4">اكتمل اللاعبون جميعاً.</td></tr>';
  $('undo').disabled=!state.rounds.length;
-
- renderStandings();
- renderRounds();
+ renderTrack();renderStandings();renderRounds();
 }
 
 /* عرض الترتيب */
-
 function renderStandings(){
  $('roundCount').textContent=state.rounds.length+' جولة مكتملة';
-
  const ranked=ranking();
  const medals=['🥇','🥈','🥉'];
-
  $('playerCards').innerHTML=ranked.map((p,i)=>`
-  <div class="player-card" style="
-   border:${i<3?'2px solid '+['#e5bd45','#b8c1c6','#c58b60'][i]:'1px solid var(--line)'};
-   background:${i===0?'#fffaf0':'#fff'};
-   position:relative
-  ">
-   <div class="row between">
-    <span class="name">${esc(p.name)}</span>
-    <span class="pill">${medals[i]||('#'+(i+1))}</span>
-   </div>
+  <div class="player-card" style="border:${i<3?'2px solid '+['#e5bd45','#b8c1c6','#c58b60'][i]:'1px solid var(--line)'};background:${i===0?'#fffaf0':'#fff'};position:relative">
+   <div class="row between"><span class="name">${esc(p.name)}</span><span class="pill">${medals[i]||('#'+(i+1))}</span></div>
    <div class="big">${p.completed?'🏆 أنهى اللعبة':'Phase '+p.phase}</div>
    <div class="small">إجمالي النقاط: <b>${p.total}</b></div>
-   <div class="small">
-    ${p.completed
-     ?'أنهى في الجولة '+p.finishRound
-     :'نقاط آخر جولة: '+p.last}
-   </div>
+   <div class="small">${p.completed?'أنهى في الجولة '+p.finishRound:'نقاط آخر جولة: '+p.last}</div>
    ${i===0?'<div class="small" style="color:#a47b12;font-weight:800;margin-top:5px">المتصدر الحالي</div>':''}
   </div>
  `).join('');
-
  const done=ranked.filter(p=>p.completed);
  const first=done.filter(p=>p.finishOrder===1);
-
  $('winner').innerHTML=done.length?`
-  <div class="winner" style="
-   text-align:center;
-   padding:22px 14px;
-   background:linear-gradient(135deg,#fff9e8,#fff);
-   border:2px solid #e8ce83;
-   border-radius:18px;
-   margin-top:16px
-  ">
+  <div class="winner" style="text-align:center;padding:22px 14px;background:linear-gradient(135deg,#fff9e8,#fff);border:2px solid #e8ce83;border-radius:18px;margin-top:16px">
    <div style="font-size:42px">🏆</div>
-   <div style="font-size:18px;font-weight:900;color:#7b5a00;margin:8px 0">
-    ${first.length===1?'الفائز باللعبة':'المتعادلون في المركز الأول'}
-   </div>
-   <div style="font-size:21px;font-weight:900;color:var(--green)">
-    ${esc(first.map(p=>p.name).join(' و '))}
-   </div>
-   <div class="sub" style="margin:9px 0 0">
-    ${first.length===1
-     ?'أول لاعب أكمل المرحلة العاشرة بنجاح.'
-     :'أكملوا المرحلة العاشرة في الجولة نفسها.'}
-   </div>
+   <div style="font-size:18px;font-weight:900;color:#7b5a00;margin:8px 0">${first.length===1?'الفائز باللعبة':'المتعادلون في المركز الأول'}</div>
+   <div style="font-size:21px;font-weight:900;color:var(--green)">${esc(first.map(p=>p.name).join(' و '))}</div>
+   <div class="sub" style="margin:9px 0 0">${first.length===1?'أول لاعب أكمل المرحلة العاشرة بنجاح.':'أكملوا المرحلة العاشرة في الجولة نفسها.'}</div>
   </div>
  `:'<div class="empty">لم ينهِ أي لاعب المرحلة العاشرة حتى الآن.</div>';
 }
 
-
 /* سجل الجولات */
 function renderRounds(){
- $('historyList').innerHTML=state.rounds.length
- ?state.rounds.map((r,idx)=>{
-  const rows=state.players
-   .filter(p=>Object.prototype.hasOwnProperty.call(r.scores,p.id))
-   .map(p=>{
-    const x=r.results?.[p.id];
-
-    return `
-     <tr>
-      <td>${esc(p.name)}</td>
-      <td>Phase ${x?.before??'—'}</td>
-      <td>${r.scores[p.id]}</td>
-      <td>
-       <span class="pill ${x?.completed||x?.advanced?'ok':'stay'}">
-        ${x?.completed?'أنهى اللعبة':x?.advanced?'تقدم':'باقٍ'}
-       </span>
-      </td>
-      <td class="phase">
-       ${x?.completed?'مكتمل':'Phase '+(x?.after??'—')}
-      </td>
-     </tr>
-    `;
-   }).join('');
-
-  return `
-   <details class="history-round">
-    <summary>الجولة ${idx+1}</summary>
-    <div class="scroll">
-     <table>
-      <thead>
-       <tr>
-        <th>اللاعب</th><th>المرحلة قبل</th>
-        <th>النقاط</th><th>النتيجة</th><th>بعد الجولة</th>
-       </tr>
-      </thead>
-      <tbody>${rows}</tbody>
-     </table>
-    </div>
-   </details>
-  `;
- }).join('')
- :'<div class="empty">لم يتم تسجيل أي جولة بعد.</div>';
+ $('historyList').innerHTML=state.rounds.length?state.rounds.map((r,idx)=>{
+  const rows=state.players.filter(p=>Object.prototype.hasOwnProperty.call(r.scores,p.id)).map(p=>{
+   const x=r.results?.[p.id];
+   return `<tr><td>${esc(p.name)}</td><td>Phase ${x?.before??'—'}</td><td>${r.scores[p.id]}</td><td><span class="pill ${x?.completed||x?.advanced?'ok':'stay'}">${x?.completed?'أنهى اللعبة':x?.advanced?'تقدم':'باقٍ'}</span></td><td class="phase">${x?.completed?'مكتمل':'Phase '+(x?.after??'—')}</td></tr>`;
+  }).join('');
+  return `<details class="history-round"><summary>الجولة ${idx+1}</summary><div class="scroll"><table><thead><tr><th>اللاعب</th><th>المرحلة قبل</th><th>النقاط</th><th>النتيجة</th><th>بعد الجولة</th></tr></thead><tbody>${rows}</tbody></table></div></details>`;
+ }).join(''):'<div class="empty">لم يتم تسجيل أي جولة بعد.</div>';
 }
 
 /* حفظ اللعبة في الأرشيف */
 function archiveCurrent(manual){
- if(!state||!state.rounds.length){
-  showConfirm(
-   'لا توجد جولات',
-   'لا توجد جولات لحفظها في السجل بعد.',
-   ()=>{}
-  );
-  return;
- }
-
+ if(!state||!state.rounds.length){showConfirm('لا توجد جولات','لا توجد جولات لحفظها في السجل بعد.',()=>{});return;}
  rebuild();
-
- const record={
-  id:Date.now(),
-  date:new Date().toLocaleString('ar-EG'),
-  names:state.names,
-  players:JSON.parse(JSON.stringify(state.players)),
-  rounds:JSON.parse(JSON.stringify(state.rounds)),
-  manual:!!manual,
-  ranking:ranking()
- };
-
- archive.unshift(record);
- saveArchive();
-
- state=null;
- saveCurrent();
-
- renderArchive();
- show('archive');
+ const record={id:Date.now(),date:new Date().toLocaleString('ar-EG'),names:state.names,players:JSON.parse(JSON.stringify(state.players)),rounds:JSON.parse(JSON.stringify(state.rounds)),manual:!!manual,ranking:ranking()};
+ archive.unshift(record);saveArchive();state=null;saveCurrent();renderArchive();show('archive');
 }
 
 /* عرض الأرشيف */
-
 function renderArchive(){
  archive=read(ARCHIVE_KEY,[]);
-
- $('archiveList').innerHTML=archive.length
- ?archive.map(g=>{
+ $('archiveList').innerHTML=archive.length?archive.map(g=>{
   const ranked=g.ranking||g.players||[];
   const medals=['🥇','🥈','🥉'];
-
-  return `
-   <div class="archive-item" style="
-    padding:16px;
-    border-radius:17px;
-    margin:14px 0;
-    background:linear-gradient(145deg,#fff,#f5f9f6);
-    box-shadow:0 4px 14px #17352c0d
-   ">
-    <div class="row between">
-     <div>
-      <h3 style="font-size:17px;color:var(--green)">
-       🏆 لعبة Phase 10
-      </h3>
-      <p style="margin:5px 0">
-       ${esc(g.date)}
-      </p>
-     </div>
-     <span class="pill">${g.manual?'إنهاء يدوي':'انتهاء تلقائي'}</span>
-<button class="red" data-delete-id="${g.id}" title="حذف اللعبة"
- style="
-  width:38px;
-  height:38px;
-  padding:0;
-  border-radius:10px;
-  font-size:19px;
-  display:flex;
-  align-items:center;
-  justify-content:center
- ">
- 🗑️
-</button>
-    </div>
-
-    <div class="row" style="
-     gap:7px;
-     margin:12px 0;
-     padding:10px;
-     background:#edf4ef;
-     border-radius:12px;
-     justify-content:space-around
-    ">
-     <div style="text-align:center">
-      <div style="font-size:19px">👥</div>
-      <b>${g.names.length}</b>
-      <div class="small">لاعبين</div>
-     </div>
-     <div style="text-align:center">
-      <div style="font-size:19px">🎴</div>
-      <b>${g.rounds.length}</b>
-      <div class="small">جولات</div>
-     </div>
-     <div style="text-align:center">
-      <div style="font-size:19px">🏁</div>
-      <b>${ranked.length}</b>
-      <div class="small">ترتيب</div>
-     </div>
-    </div>
-
-    <div style="
-     font-weight:800;
-     font-size:14px;
-     margin:15px 0 9px;
-     color:var(--ink)
-    ">
-     الترتيب النهائي
-    </div>
-
-    ${ranked.map((p,i)=>{
-     const total=p.total??g.rounds.reduce(
-      (s,r)=>s+(r.scores[p.id]??0),0
-     );
-
-     return `
-      <div style="
-       display:flex;
-       align-items:center;
-       gap:10px;
-       padding:11px;
-       margin:6px 0;
-       border-radius:12px;
-       background:${i===0?'#fff5d9':i===1?'#f0f2f3':i===2?'#f8eee6':'#fff'};
-       border:1px solid ${i===0?'#ead18a':'var(--line)'};
-      ">
-       <div style="
-        width:35px;
-        text-align:center;
-        font-size:${i<3?'23px':'14px'};
-        font-weight:900
-       ">
-        ${medals[i]||('#'+(i+1))}
-       </div>
-
-       <div style="flex:1;min-width:0">
-        <div style="font-weight:800;overflow-wrap:anywhere">
-         ${esc(p.name)}
-        </div>
-        <div class="small">
-         ${p.completed?'أكمل Phase 10':'Phase '+p.phase}
-         ${p.finishRound?' · الجولة '+p.finishRound:''}
-        </div>
-       </div>
-
-       <div style="text-align:center;white-space:nowrap">
-        <div style="font-size:18px;font-weight:900;color:var(--green)">
-         ${total}
-        </div>
-        <div class="small">نقطة</div>
-       </div>
-      </div>
-     `;
-    }).join('')}
-
-    <details style="margin-top:13px">
-     <summary style="
-      padding:11px;
-      border-radius:10px;
-      background:#edf2ef
-     ">
-      عرض سجل الجولات
-     </summary>
-     <div style="margin-top:10px">
-      ${g.rounds.map((r,i)=>`
-       <div class="history-round">
-        <div style="
-         padding:10px;
-         background:#f8faf9;
-         font-weight:800;
-         font-size:13px
-        ">
-         الجولة ${i+1}
-        </div>
-        <div class="scroll">
-         <table>
-          <thead>
-           <tr><th>اللاعب</th><th>النقاط</th></tr>
-          </thead>
-          <tbody>
-           ${ranked.filter(p=>
-            Object.prototype.hasOwnProperty.call(r.scores,p.id)
-           ).map(p=>`
-            <tr>
-             <td>${esc(p.name)}</td>
-             <td>${r.scores[p.id]}</td>
-            </tr>
-           `).join('')}
-          </tbody>
-         </table>
-        </div>
-       </div>
-      `).join('')}
-     </div>
-    </details>
+  return `<div class="archive-item" style="padding:16px;border-radius:17px;margin:14px 0;background:linear-gradient(145deg,#fff,#f5f9f6);box-shadow:0 4px 14px #17352c0d">
+   <div class="row between">
+    <div><h3 style="font-size:17px;color:var(--green)">🏆 لعبة Phase 10</h3><p style="margin:5px 0">${esc(g.date)}</p></div>
+    <span class="pill">${g.manual?'إنهاء يدوي':'انتهاء تلقائي'}</span>
+    <button class="red" data-delete-id="${g.id}" title="حذف اللعبة" style="width:38px;height:38px;padding:0;border-radius:10px;font-size:19px;display:flex;align-items:center;justify-content:center">🗑️</button>
    </div>
-  `;
- }).join('')
-  :'<div class="empty">لا توجد ألعاب محفوظة حتى الآن.</div>';
+   <div class="row" style="gap:7px;margin:12px 0;padding:10px;background:#edf4ef;border-radius:12px;justify-content:space-around">
+    <div style="text-align:center"><div style="font-size:19px">👥</div><b>${g.names.length}</b><div class="small">لاعبين</div></div>
+    <div style="text-align:center"><div style="font-size:19px">🎴</div><b>${g.rounds.length}</b><div class="small">جولات</div></div>
+    <div style="text-align:center"><div style="font-size:19px">🏁</div><b>${ranked.length}</b><div class="small">ترتيب</div></div>
+   </div>
+   <div style="font-weight:800;font-size:14px;margin:15px 0 9px;color:var(--ink)">الترتيب النهائي</div>
+   ${ranked.map((p,i)=>{
+    const total=p.total??g.rounds.reduce((s,r)=>s+(r.scores[p.id]??0),0);
+    return `<div style="display:flex;align-items:center;gap:10px;padding:11px;margin:6px 0;border-radius:12px;background:${i===0?'#fff5d9':i===1?'#f0f2f3':i===2?'#f8eee6':'#fff'};border:1px solid ${i===0?'#ead18a':'var(--line)'}">
+     <div style="width:35px;text-align:center;font-size:${i<3?'23px':'14px'};font-weight:900">${medals[i]||('#'+(i+1))}</div>
+     <div style="flex:1;min-width:0"><div style="font-weight:800;overflow-wrap:anywhere">${esc(p.name)}</div><div class="small">${p.completed?'أكمل Phase 10':'Phase '+p.phase}${p.finishRound?' · الجولة '+p.finishRound:''}</div></div>
+     <div style="text-align:center;white-space:nowrap"><div style="font-size:18px;font-weight:900;color:var(--green)">${total}</div><div class="small">نقطة</div></div>
+    </div>`;
+   }).join('')}
+   <details style="margin-top:13px"><summary style="padding:11px;border-radius:10px;background:#edf2ef">عرض سجل الجولات</summary><div style="margin-top:10px">
+    ${g.rounds.map((r,i)=>`<div class="history-round"><div style="padding:10px;background:#f8faf9;font-weight:800;font-size:13px">الجولة ${i+1}</div><div class="scroll"><table><thead><tr><th>اللاعب</th><th>النقاط</th></tr></thead><tbody>${ranked.filter(p=>Object.prototype.hasOwnProperty.call(r.scores,p.id)).map(p=>`<tr><td>${esc(p.name)}</td><td>${r.scores[p.id]}</td></tr>`).join('')}</tbody></table></div></div>`).join('')}
+   </div></details>
+  </div>`;
+ }).join(''):'<div class="empty">لا توجد ألعاب محفوظة حتى الآن.</div>';
 
  $('archiveList').querySelectorAll('[data-delete-id]').forEach(btn=>{
   btn.onclick=()=>{
    const id=Number(btn.dataset.deleteId);
-
-showConfirm(
- 'تأكيد حذف اللعبة',
- 'هل أنت متأكد من حذف هذه اللعبة نهائياً؟',
- ()=>{
-  archive=archive.filter(g=>g.id!==id);
-  saveArchive();
-  renderArchive();
- }
-);
+   showConfirm('تأكيد حذف اللعبة','هل أنت متأكد من حذف هذه اللعبة نهائياً؟',()=>{
+    archive=archive.filter(g=>g.id!==id);saveArchive();renderArchive();
+   });
   };
  });
 }
@@ -1066,176 +776,119 @@ showConfirm(
 /* التنقل */
 $('goSetup').onclick=()=>{
  $('playerCount').value='';
+ document.querySelector('input[name="ruleMode"][value="auto"]').checked=true;
+ renderManualRulePicker();
  $('nameFields').innerHTML='';
  $('startGame').disabled=true;
  show('setup');
 };
-$('playerCount').onchange=()=>{
- renderNames();
-};
-
+$('playerCount').onchange=()=>renderNames();
 $('backHome1').onclick=()=>show('home');
 $('backHome2').onclick=()=>show('home');
 $('backHome3').onclick=()=>show('home');
-
-$('showArchive').onclick=()=>{
- renderArchive();
- show('archive');
-};
+$('showArchive').onclick=()=>{renderArchive();show('archive');};
 $('clearArchive').onclick=()=>{
- if(!archive.length){
- showConfirm(
-  'الأرشيف فارغ',
-  'لا توجد ألعاب محفوظة في الأرشيف حالياً.',
-  ()=>{}
- );
- return;
-}
-
- showConfirm(
-  'تأكيد مسح الأرشيف',
-  'هل أنت متأكد من حذف جميع الألعاب المحفوظة؟ لا يمكن التراجع عن هذا الإجراء.',
-  ()=>{
-   archive=[];
-   saveArchive();
-   renderArchive();
-   
-  }
- );
+ if(!archive.length){showConfirm('الأرشيف فارغ','لا توجد ألعاب محفوظة في الأرشيف حالياً.',()=>{});return;}
+ showConfirm('تأكيد مسح الأرشيف','هل أنت متأكد من حذف جميع الألعاب المحفوظة؟ لا يمكن التراجع عن هذا الإجراء.',()=>{
+  archive=[];saveArchive();renderArchive();
+ });
 };
-$('resumeGame').onclick=()=>{
- if(state){
-  rebuild();
-  renderGame();
- }
-};
+$('resumeGame').onclick=()=>{if(state){rebuild();renderGame();}};
 
 /* النسخ الاحتياطي واستعادة البيانات */
-
 $('exportBackup').onclick=()=>{
- const backup={
-  app:'Phase 10 Calculator',
-  version:1,
-  current:JSON.parse(localStorage.getItem(CURRENT_KEY)||'null'),
-  archive:JSON.parse(localStorage.getItem(ARCHIVE_KEY)||'[]')
- };
-
- const blob=new Blob(
-  [JSON.stringify(backup,null,2)],
-  {type:'application/json'}
- );
-
+ const backup={app:'Phase 10 Calculator',version:1,current:JSON.parse(localStorage.getItem(CURRENT_KEY)||'null'),archive:JSON.parse(localStorage.getItem(ARCHIVE_KEY)||'[]'),rules:JSON.parse(localStorage.getItem(RULES_KEY)||'[]')};
+ const blob=new Blob([JSON.stringify(backup,null,2)],{type:'application/json'});
  const url=URL.createObjectURL(blob);
  const link=document.createElement('a');
-
- link.href=url;
- link.download='Phase10-Backup-'+new Date().toISOString().slice(0,10)+'.json';
-
- link.click();
- URL.revokeObjectURL(url);
-
- 
+ link.href=url;link.download='Phase10-Backup-'+new Date().toISOString().slice(0,10)+'.json';
+ link.click();URL.revokeObjectURL(url);
 };
-
-$('importBackup').onclick=()=>{
- $('backupFile').click();
-};
-
+$('importBackup').onclick=()=>{$('backupFile').click();};
 $('backupFile').onchange=(event)=>{
- const file=event.target.files[0];
- if(!file)return;
-
+ const file=event.target.files[0];if(!file)return;
  const reader=new FileReader();
-
-reader.onload=()=>{
+ reader.onload=()=>{
   try{
    const backup=JSON.parse(reader.result);
-
-   if(
-    backup.app!=='Phase 10 Calculator'||
-    !Array.isArray(backup.archive)||
-    (backup.current!==null&&
-     (typeof backup.current!=='object'||Array.isArray(backup.current)))
-   ){
-    showConfirm(
-     'ملف غير صالح',
-     'ملف النسخة الاحتياطية غير صالح. تأكد من اختيار ملف صحيح.',
-     ()=>{}
-    );
-    return;
+   if(backup.app!=='Phase 10 Calculator'||!Array.isArray(backup.archive)||(backup.rules!==undefined&&!Array.isArray(backup.rules))||(backup.current!==null&&(typeof backup.current!=='object'||Array.isArray(backup.current)))){
+    showConfirm('ملف غير صالح','ملف النسخة الاحتياطية غير صالح. تأكد من اختيار ملف صحيح.',()=>{});return;
    }
-
-   showConfirm(
-    'تأكيد استعادة النسخة الاحتياطية',
-    'سيتم استبدال اللعبة الحالية والأرشيف بالبيانات الموجودة في الملف. هل تريد المتابعة؟',
-    ()=>{
-     localStorage.setItem(CURRENT_KEY,JSON.stringify(backup.current));
-     localStorage.setItem(ARCHIVE_KEY,JSON.stringify(backup.archive));
-     location.reload();
-    }
-   );
-
-  }catch(error){
-   showConfirm(
-    'تعذر قراءة الملف',
-    'الملف تالف أو غير صالح كنسخة احتياطية. تأكد من اختيار ملف صحيح.',
-    ()=>{}
-   );
-  }
+   showConfirm('تأكيد استعادة النسخة الاحتياطية','سيتم استبدال اللعبة الحالية والأرشيف بالبيانات الموجودة في الملف. هل تريد المتابعة؟',()=>{
+    localStorage.setItem(CURRENT_KEY,JSON.stringify(backup.current));
+    localStorage.setItem(ARCHIVE_KEY,JSON.stringify(backup.archive));
+    if(Array.isArray(backup.rules))localStorage.setItem(RULES_KEY,JSON.stringify(backup.rules));
+    location.reload();
+   });
+  }catch(error){showConfirm('تعذر قراءة الملف','الملف تالف أو غير صالح كنسخة احتياطية. تأكد من اختيار ملف صحيح.',()=>{});}
  };
-
- 
- reader.readAsText(file);
- event.target.value='';
+ reader.readAsText(file);event.target.value='';
 };
+
 /* بدء لعبة */
 $('startGame').onclick=()=>{
  const selectedCount=Number($('playerCount').value);
+ const nameInputs=[...$('nameFields').querySelectorAll('input[data-name]')];
+ const names=nameInputs.map(x=>x.value.trim());
+ const selectedCharacters=[...$('nameFields').querySelectorAll('select[data-character]')].map(x=>x.value);
 
-const names=[
- ...$('nameFields').querySelectorAll('input[data-name]')
-].map(x=>x.value.trim());
-if(!selectedCount){
- showConfirm(
-  'اختيار عدد اللاعبين',
-  'اختر عدد اللاعبين أولاً.',
-  ()=>{}
- );
- return;
-}
+ if(selectedCount>6){showConfirm('الحد الأقصى للاعبين','اللعبة تدعم حتى 6 لاعبين فقط.',()=>{});return;}
+ if(!selectedCount){showConfirm('اختيار عدد اللاعبين','اختر عدد اللاعبين أولاً.',()=>{});return;}
+ if(names.length!==selectedCount||names.some(n=>!n)){showConfirm('أسماء اللاعبين','من فضلك أدخل اسم كل اللاعبين.',()=>{});return;}
 
-if(names.length!==selectedCount||names.some(n=>!n)){
- showConfirm(
-  'أسماء اللاعبين',
-  'من فضلك أدخل اسم كل اللاعبين.',
-  ()=>{}
- );
- return;
-}
-
- if(state&&state.rounds.length&&
-  !confirm('هناك لعبة حالية. بدء لعبة جديدة سيحفظها في الأرشيف أولاً.')
- )return;
+ if(state&&state.rounds.length&&!confirm('هناك لعبة حالية. بدء لعبة جديدة سيحفظها في الأرشيف أولاً.'))return;
 
  if(state&&state.rounds.length){
   archive.unshift({
-   id:Date.now(),
-   date:new Date().toLocaleString('ar-EG'),
-   names:state.names,
+   id:Date.now(),date:new Date().toLocaleString('ar-EG'),
+   names:state.names,selectedRules:state.selectedRules||[],
    players:JSON.parse(JSON.stringify(state.players)),
-   rounds:JSON.parse(JSON.stringify(state.rounds)),
-   manual:true,
-   ranking:ranking()
+   rounds:JSON.parse(JSON.stringify(state.rounds)),manual:true,ranking:ranking()
   });
   saveArchive();
  }
 
+ const mode=document.querySelector('input[name="ruleMode"]:checked')?.value||'auto';
+ let selectedRules=[];
+
+ // الوضع اليدوي: يجب اختيار 10 أحكام
+ if(mode==='manual'){
+  const ids=[...document.querySelectorAll('.manual-rule-choice:checked')].map(x=>x.value);
+  if(ids.length!==10){
+   showConfirm('اختيار الأحكام','اختر 10 أحكام بالضبط لبدء اللعبة.',()=>{});return;
+  }
+  selectedRules=ids.map(id=>rules.find(r=>r.id===id)).filter(Boolean);
+
+  if(selectedRules.length!==10){
+   showConfirm('الأحكام المختارة','بعض الأحكام المختارة لم تعد موجودة في المكتبة. راجع اختيارك وحاول مرة أخرى.',()=>{});return;
+  }
+ }
+
+ // الوضع التلقائي: يحتاج إلى 10 أحكام على الأقل
+ else if(mode==='auto'){
+  if(rules.length<10){
+   showConfirm('أحكام غير كافية',`تحتاج إلى 10 أحكام على الأقل لبدء اللعبة. الموجود حاليًا: ${rules.length}. افتح إدارة الأحكام وأضف المزيد.`,()=>{});
+   return;
+  }
+  selectedRules=[...rules].sort(()=>Math.random()-.5).slice(0,10);
+ }
+
+ // وضع اللعب بدون أحكام: لا يحتاج إلى أي حكم
+ else if(mode==='none'){
+  selectedRules=[];
+ }
+
  rememberNames(names);
+ pendingScores={};
 
  state={
+  ruleMode:mode,
+  selectedRules:JSON.parse(JSON.stringify(selectedRules)),
   names,
   players:names.map((name,id)=>({
-   id,name,phase:1,completed:false,finishRound:null,finishOrder:null
+   id,name,
+   character:selectedCharacters[id]||['lion','rabbit','bear','panda','fox','tiger'][id%6],
+   phase:1,completed:false,finishRound:null,finishOrder:null
   })),
   rounds:[]
  };
@@ -1249,131 +902,228 @@ $('saveRound').onclick=()=>{
  const players=activePlayers();
  const fields=[...document.querySelectorAll('[data-score]')];
 
-if(
-  fields.length!==players.length||
-  fields.some(x=>
-   x.value.trim()===''||
-   !Number.isFinite(+x.value)||
-   +x.value<0||
-   +x.value%5!==0
-  )
- ){
-showConfirm(
- 'تنبيه النقاط',
- 'النقاط لازم تكون 0 أو 5 أو أحد مضاعفات الرقم 5، ولازم تدخل نقاط كل اللاعبين.',
- ()=>{}
-);
-return;
-}
+ if(fields.length!==players.length||fields.some(x=>x.value.trim()===''||!Number.isFinite(+x.value)||+x.value<0||+x.value%5!==0)){
+  showConfirm('تنبيه النقاط','النقاط لازم تكون 0 أو 5 أو أحد مضاعفات الرقم 5، ولازم تدخل نقاط كل اللاعبين.',()=>{});
+  return;
+ }
+ if(!fields.some(x=>Number(x.value)===0)){
+  showConfirm('تنبيه إنهاء الجولة','لازم لاعب واحد على الأقل تكون نتيجته 0 لإنهاء الجولة.',()=>{});
+  return;
+ }
 
-if(!fields.some(x=>Number(x.value)===0)){
- showConfirm(
-  'تنبيه إنهاء الجولة',
-  'لازم لاعب واحد على الأقل تكون نتيجته 0 لإنهاء الجولة.',
-  ()=>{}
- );
- return;
-}
-
-const scores={};
- fields.forEach(x=>{
-  scores[x.dataset.score]=Math.floor(+x.value);
- });
-
+ const scores={};
+ fields.forEach(x=>{scores[x.dataset.score]=Math.floor(+x.value);});
  const results={};
-
  players.forEach(p=>{
   const before=p.phase;
   const score=scores[p.id];
   const completed=before===10&&score<50;
   const advanced=before<10&&score<50;
-
-  results[p.id]={
-   before,score,advanced,completed,
-   after:completed?'مكتمل':advanced?before+1:before
-  };
+  results[p.id]={before,score,advanced,completed,after:completed?'مكتمل':advanced?before+1:before};
  });
 
  state.rounds.push({scores,results});
-
+ pendingScores={};
  rebuild();
  saveCurrent();
-if(state.players.every(p=>p.completed)){
-  archiveCurrent(false);
-  
-  return;
-}
 
-if(activePlayers().length===1){
-  const lastPlayer=activePlayers()[0].name;
-  archiveCurrent(false);
+ if(state.players.every(p=>p.completed)){archiveCurrent(false);return;}
+ if(activePlayers().length===1){archiveCurrent(false);return;}
 
-  return;
-}
-
-renderGame();
+ renderGame();
+ $('roundSuccessMessage').textContent='تم حفظ نتائج الجولة '+state.rounds.length+' وتحديث مراحل اللاعبين بنجاح.';
+ $('nextRoundNumber').textContent='🎴 الجولة '+(state.rounds.length+1);
+ $('roundSuccessModal').classList.remove('hidden');
 };
+
+/* زر بدء الجولة الجديدة */
+$('continueNextRound').onclick=()=>{$('roundSuccessModal').classList.add('hidden');};
+
 /* التراجع عن آخر جولة */
 $('undo').onclick=()=>{
  if(!state?.rounds.length)return;
-
- showConfirm(
-  'تأكيد التراجع عن الجولة',
-  'هل تريد التراجع عن آخر جولة؟ سيتم حذف نتائج هذه الجولة وإعادة احتساب الترتيب.',
-  ()=>{
-   state.rounds.pop();
-   rebuild();
-   saveCurrent();
-   renderGame();
-  }
- );
-};
-/* خيارات إنهاء اللعبة */
-/* خيارات إنهاء اللعبة */
-$('endGame').onclick=()=>{
- $('endModal').classList.remove('hidden');
+ showConfirm('تأكيد التراجع عن الجولة','هل تريد التراجع عن آخر جولة؟ سيتم حذف نتائج هذه الجولة وإعادة احتساب الترتيب.',()=>{
+  state.rounds.pop();pendingScores={};rebuild();saveCurrent();renderGame();
+ });
 };
 
-$('cancelEndModal').onclick=()=>{
- $('endModal').classList.add('hidden');
-};
+/* خيارات إنهاء اللعبة */
+$('endGame').onclick=()=>{$('endModal').classList.remove('hidden');};
+$('cancelEndModal').onclick=()=>{$('endModal').classList.add('hidden');};
+
 $('deleteGameOption').onclick=()=>{
- showConfirm(
-  'تأكيد حذف اللعبة',
-  'هل أنت متأكد؟ سيتم حذف اللعبة الحالية وجميع جولاتها نهائياً.',
-  ()=>{
-   state=null;
-   saveCurrent();
-   $('resumeGame').classList.add('hidden');
-   $('endModal').classList.add('hidden');
-   show('home');
-   
-  }
- );
+ showConfirm('تأكيد حذف اللعبة','هل أنت متأكد؟ سيتم حذف اللعبة الحالية وجميع جولاتها نهائياً.',()=>{
+  state=null;saveCurrent();$('resumeGame').classList.add('hidden');$('endModal').classList.add('hidden');show('home');
+ });
 };
 $('saveGameOption').onclick=()=>{
- showConfirm(
-  'تأكيد حفظ اللعبة',
-  'سيتم حفظ اللعبة وترتيب اللاعبين في الأرشيف. هل تريد المتابعة؟',
-  ()=>{
-   $('endModal').classList.add('hidden');
-   archiveCurrent(true);
-  }
- );
+ showConfirm('تأكيد حفظ اللعبة','سيتم حفظ اللعبة وترتيب اللاعبين في الأرشيف. هل تريد المتابعة؟',()=>{
+  $('endModal').classList.add('hidden');archiveCurrent(true);
+ });
 };
 $('pauseGameOption').onclick=()=>{
- saveCurrent();
- $('resumeGame').classList.remove('hidden');
- $('endModal').classList.add('hidden');
- show('home');
- 
+ saveCurrent();$('resumeGame').classList.remove('hidden');$('endModal').classList.add('hidden');show('home');
 };
 
 /* استعادة اللعبة الحالية عند فتح التطبيق */
+
 archive=read(ARCHIVE_KEY,[]);
+rules=read(RULES_KEY,[]);
+
+/* مكتبة الأحكام الافتراضية المعتمدة - 96 حكم */
+const defaultRuleSets=[
+{level:'سهل',items:[
+['مجموعتان من 3 ورقات بنفس الرقم',6],
+['Run 4 + Set 3',7],
+['Run 4 + Set 4',8],
+['Run 6 + Under 5 (3 ورقات)',9],
+['Odd 6 + Over 8 (3 ورقات)',9],
+['Run 4 + Run 4',8],
+['Run 5 + Under 5 (3 ورقات)',8],
+['Run 4 + Over 9 (3 ورقات)',7],
+['Run 6 + Over 8 (ورقتان)',8],
+['3 Red + 3 Blue + 3 Yellow',9],
+['Run 3 + 3 Red Cards',6],
+['6 Odd Cards',6],
+['4 Yellow Cards + 3 Even Cards',7],
+['4 Even + 3 Odd',7],
+['Run 5 + Set 2',7],
+['Run 4 + 4 Cards of Different Colors',8],
+['Run 4 + 3 Cards of Different Colors',7],
+['3 Sets of 2',6],
+['Run 5 + 2 Cards of the Same Color',7],
+['Set 3 + 4 Cards of Different Colors',7]
+]},
+{level:'متوسط',items:[
+['Under 7 (3) + Over 7 (2) + Set 3',8],
+['Run 4 + Even of One Color 4',8],
+['Under 4 (2) + Over 8 (2) + Run 4',8],
+['6 Cards of One Color + Set 3',9],
+['Set 3 + 5 Cards of One Color',8],
+['Set 4 + Under 6 (4)',8],
+['Run Even 4 + Set 3',7],
+['5 Red Cards + Set 3',8],
+['4 Yellow Cards + 4 Red Cards',8],
+['Run 7',7],
+['Under 4 (3) + Over 9 (2) + Set 2',7],
+['5 Cards of One Color + 3 Cards of Another Color',8],
+['Set 2 + Set 2 + 3 Cards of One Color',7],
+['Set 4 + 3 Red Cards',7],
+['Even 8',8],
+['Run 4 + 4 Odd Cards',8],
+['2 Sets of 3 + 4 Even Cards',10],
+['Run 4 + Set 2 + Set 2',8],
+['4 Red Cards + 4 Even Cards',8]
+]},
+{level:'فوق المتوسط',items:[
+['Over 9 (3) + Set 4',7],
+['Color Run 5 + Over 8 (3)',8],
+['Run Odd 5 + Under 6 (4)',9],
+['Under 6 (4) + Run Even 4',8],
+['Run 5 + Set 4',9],
+['Under 8 (4) + Even of One Color (4)',8],
+['Run 6 + Even of One Color 3',9],
+['Run Odd 4 + Even 5',9],
+['Run 5 + Odd of One Color 3',8],
+['Set 4 + Run Odd 4',8],
+['Under 8 (4) + Run 5',9],
+['Set 3 + Even 4 + Over 9 (2)',9],
+['Run 8',8],
+['4 Blue Cards + Run 5',9],
+['6 Blue Cards + 3 Odd Cards',9],
+['Even of One Color 8',8],
+['Run Odd 5 + Set 3',8],
+['Color Run 4 + 4 Odd Cards',8],
+['Set 4 + 3 Even Cards + 3 Odd Cards',10]
+]},
+{level:'صعب',items:[
+['Odd of One Color 4 + Set 3',7],
+['Run 5 + Odd of One Color 4',9],
+['Set 4 + 5 Cards of One Color',9],
+['Over 7 (3) + Color Run 4',7],
+['Color Run 6 + Under 5 (3)',9],
+['Set 5 + Run 4',9],
+['Even of One Color 4 + Set 4',8],
+['Run Even 5 + Set 3',8],
+['6 Green Cards + Run 4',10],
+['3 Green + 3 Yellow + Run 3',9],
+['Run 4 + Set 3 + 2 Cards of One Color',9],
+['Run Odd 5 + Set 4',9],
+['Run Even 4 + 4 Red Cards',8],
+['Run 5 + Under 5 (3) + Set 2',10],
+['Set 5 + Set 3',8],
+['Set 5 + Set 2',7],
+['Run 6 + Set 2',8],
+['Run 5 + 3 Cards of One Color + Set 2',10]
+]},
+{level:'صعب جدًا',items:[
+['Run Odd 5 + Run Even 4',9],
+['Under 5 (2) + Run Odd 4 + Set 2',8],
+['Even of One Color 5 + Over 9 (3)',8],
+['Color Run 5 + Run Odd 3',8],
+['Set 3 + Run Odd 5 + Over 9 (2)',10],
+['10 Cards of One Color',10],
+['4 Red Cards + Run Odd 4 + Set 2',9],
+['3 Blue Cards + Run Even 4 + Set 3',10],
+['3 Yellow Cards + Color Run 4 + Run Odd 3',10],
+['4 Yellow Cards + Run Even 4 + Set 2',10],
+['3 Blue Cards + Run 5 + Odd of One Color 2',10],
+['Under 5 (2) + Over 8 (2) + Color Run 4 + Set 2',10],
+['Set 3 + Set 3 + Set 3',9],
+['Run 6 + Set 3',9],
+['Run 5 + Set 5',10],
+['Color Run 4 + Color Run 4',8],
+['Run 3 + Run 3 + Set 3',9],
+['Under 6 (4) + Odd of One Color (5)',9],
+['Run Even 5 + Over 8 (4)',9],
+['مجموعتان من 4 ورقات فردية',8]
+]}
+];
+
+/* إضافة الأحكام الناقصة دون تكرار أو حذف الأحكام المخصصة */
+const normalizeRuleName=name=>String(name)
+ .trim()
+ .toLowerCase()
+ .replace(/\s+/g,' ');
+
+const existingRuleNames=new Set(
+ rules.map(r=>normalizeRuleName(r.name))
+);
+
+let addedDefaultRules=0;
+let defaultRuleIndex=1;
+
+defaultRuleSets.forEach(group=>{
+ group.items.forEach(([name,cards])=>{
+  const normalized=normalizeRuleName(name);
+
+  if(!existingRuleNames.has(normalized)){
+   rules.push({
+    id:'default-rule-'+String(defaultRuleIndex).padStart(3,'0'),
+    name,
+    level:group.level,
+    cards
+   });
+
+   existingRuleNames.add(normalized);
+   addedDefaultRules++;
+  }
+
+  defaultRuleIndex++;
+ });
+});
+
+if(addedDefaultRules>0){
+ saveRules();
+}
+
 state=read(CURRENT_KEY,null);
 
+
 if(state&&Array.isArray(state.names)&&Array.isArray(state.rounds)){
+ // توافق مع الألعاب القديمة التي لم يكن فيها ruleMode
+ if(!state.ruleMode)state.ruleMode='auto';
+ pendingScores={};
  rebuild();
  $('resumeGame').classList.remove('hidden');
 }else{
@@ -1381,6 +1131,7 @@ if(state&&Array.isArray(state.names)&&Array.isArray(state.rounds)){
 }
 
 renderArchive();
+renderRules();
 show('home');
 </script>
 </body>
