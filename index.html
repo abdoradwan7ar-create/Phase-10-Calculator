@@ -251,7 +251,20 @@ main{max-width:780px;padding:12px 14px 34px}
 .race-modal-card input{width:100%;text-align:center;font-size:30px;font-weight:1000;color:#0753a9;border:2px solid #91cafa;border-radius:15px;padding:12px}
 .race-modal-actions{display:flex;gap:8px;margin-top:14px}
 .race-modal-actions button{flex:1}
-@media(max-width:390px){.race-track-grid{grid-template-columns:repeat(6,minmax(0,1fr)) 35px;gap:2px;min-height:500px}.race-phase-mark span{width:27px;height:27px;font-size:10px}.race-player-cards{grid-template-columns:1fr 1fr}.race-player-card{padding:6px 5px;gap:5px}.race-player-avatar{width:35px;height:35px;flex-basis:35px;font-size:22px}.race-player-name{font-size:11px}.race-player-stats{font-size:9px}.race-token-tag{font-size:7px;padding:2px 3px}}
+@media(max-width:390px){
+ .race-track-grid{
+  grid-template-columns:repeat(var(--player-count,6),minmax(0,0.85fr)) minmax(0,1.7fr);
+  gap:3px;
+  min-height:500px;
+ }
+ .race-phase-mark span{width:27px;height:27px;font-size:10px}
+ .race-player-cards{grid-template-columns:1fr 1fr}
+ .race-player-card{padding:6px 5px;gap:5px}
+ .race-player-avatar{width:35px;height:35px;flex-basis:35px;font-size:22px}
+ .race-player-name{font-size:11px}
+ .race-player-stats{font-size:9px}
+ .race-token-tag{font-size:7px;padding:2px 3px}
+}
 @media(min-width:560px){.race-track-grid{min-height:640px}.race-player-cards{grid-template-columns:repeat(3,minmax(0,1fr))}}
 </style>
 </head>
