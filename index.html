@@ -213,6 +213,77 @@ main{max-width:780px;padding:12px 14px 34px}
  overflow-wrap:normal;
  word-break:normal;
 }
+
+.race-lane-score{
+ position:absolute;
+ top:5px;
+ left:50%;
+ transform:translateX(-50%);
+ z-index:3;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ justify-content:center;
+ min-width:42px;
+ padding:4px 7px;
+ border-radius:10px;
+ background:linear-gradient(145deg,#ffffff,#e4f1ff);
+ border:2px solid var(--lane-color);
+ box-shadow:0 3px 7px #003d8b25;
+ color:#174477;
+ line-height:1.1;
+}
+
+.race-token-combined{
+ width:auto;
+ max-width:100%;
+}
+
+.race-token-combo{
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ justify-content:center;
+ gap:1px;
+ width:54px;
+ height:76px;
+ border:2px solid var(--lane-color);
+ border-radius:28px;
+ background:linear-gradient(145deg,#fff,#e4f1ff);
+ box-shadow:0 3px 0 #164d91,0 5px 9px #003d8b45;
+}
+
+.race-token-combo strong{
+ font-size:15px;
+ font-weight:1000;
+ color:#174477;
+ line-height:1.1;
+}
+
+.race-token-combo small{
+ font-size:8px;
+ font-weight:800;
+ color:#174477;
+}
+
+.race-token-combo .race-token-face{
+ width:34px;
+ height:34px;
+ font-size:23px;
+ box-shadow:none;
+ border:0;
+}
+
+.race-lane-score strong{
+ font-size:15px;
+ font-weight:1000;
+}
+.race-lane-score small{
+ font-size:8px;
+ font-weight:800;
+ margin-top:2px;
+}
+
 .race-lane{position:relative;overflow:visible;border-left:2px solid #fff9;border-right:2px solid #fff9;border-radius:17px;background:linear-gradient(180deg,#ffffffb8,color-mix(in srgb,var(--lane-color) 24%,#ffffff));box-shadow:inset 0 0 0 1px #fff8}
 .race-lane:nth-child(2n){filter:saturate(1.06)}
 .race-lane:before{content:"";position:absolute;top:4px;bottom:4px;left:50%;border-left:3px dashed #fff9;transform:translateX(-50%)}
@@ -223,12 +294,57 @@ main{max-width:780px;padding:12px 14px 34px}
 .race-token-tag{white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis;padding:3px 5px;border-radius:9px;background:var(--lane-color);color:#fff;font-size:8px;font-weight:1000;box-shadow:0 2px 4px #003d8b40}
 .race-token.is-done .race-token-face{background:linear-gradient(145deg,#fff6b1,#ffc83f)}
 .race-player-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}
-.race-player-card{display:flex;align-items:center;gap:8px;min-width:0;text-align:right;border:2px solid var(--lane-color);border-radius:15px;padding:8px;background:linear-gradient(145deg,#fff,#edf6ff);color:#163c77;box-shadow:0 4px 8px #003d8b1c;cursor:pointer;transition:transform .15s ease,box-shadow .15s ease}
+.race-player-card{
+ display:flex;
+ align-items:center;
+ gap:7px;
+ min-width:0;
+ text-align:right;
+ border:2px solid var(--lane-color);
+ border-radius:15px;
+ padding:8px;
+ background:linear-gradient(145deg,#fff,#edf6ff);
+ color:#163c77;
+ box-shadow:0 4px 8px #003d8b1c;
+ cursor:pointer;
+ transition:transform .15s ease,box-shadow .15s ease;
+}
+.race-player-status{
+ flex:0 0 auto;
+ font-size:9px;
+ font-weight:1000;
+ color:#fff;
+ background:var(--lane-color);
+ padding:4px 6px;
+ border-radius:8px;
+ white-space:nowrap;
+}
 .race-player-card:active{transform:translateY(2px)}
 .race-player-card:disabled{opacity:.75;cursor:default}
 .race-player-avatar{width:42px;height:42px;flex:0 0 42px;display:grid;place-items:center;border-radius:50%;background:linear-gradient(145deg,#fff,#dceeff);border:2px solid var(--lane-color);font-size:26px}
-.race-player-meta{min-width:0;flex:1}
-.race-player-name{font-size:12px;font-weight:1000;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.race-player-meta{
+ min-width:0;
+ flex:1;
+ display:flex;
+ flex-direction:column;
+ gap:3px;
+}
+
+.race-player-name{
+ font-size:12px;
+ font-weight:1000;
+ white-space:normal;
+ overflow-wrap:anywhere;
+ line-height:1.4;
+}
+
+.race-player-stats{
+ font-size:10px;
+ color:#60769a;
+ margin-top:0;
+ line-height:1.5;
+ white-space:nowrap;
+}
 .race-player-stats{font-size:10px;color:#60769a;margin-top:3px;line-height:1.5}
 .race-player-status{font-size:9px;font-weight:1000;color:#fff;background:var(--lane-color);padding:3px 6px;border-radius:8px;white-space:nowrap}
 .race-player-card.is-entered{background:linear-gradient(145deg,#eaffef,#d1f8d8)}
@@ -258,11 +374,30 @@ main{max-width:780px;padding:12px 14px 34px}
   min-height:500px;
  }
  .race-phase-mark span{width:27px;height:27px;font-size:10px}
- .race-player-cards{grid-template-columns:1fr 1fr}
- .race-player-card{padding:6px 5px;gap:5px}
- .race-player-avatar{width:35px;height:35px;flex-basis:35px;font-size:22px}
- .race-player-name{font-size:11px}
- .race-player-stats{font-size:9px}
+.race-player-cards{
+ grid-template-columns:1fr;
+ gap:7px;
+}
+
+.race-player-card{
+ padding:8px;
+ gap:8px;
+}
+
+.race-player-avatar{
+ width:38px;
+ height:38px;
+ flex:0 0 38px;
+ font-size:23px;
+}
+
+.race-player-name{
+ font-size:12px;
+}
+
+.race-player-stats{
+ font-size:10px;
+}
  .race-token-tag{font-size:7px;padding:2px 3px}
 }
 @media(min-width:560px){.race-track-grid{min-height:640px}.race-player-cards{grid-template-columns:repeat(3,minmax(0,1fr))}}
@@ -292,12 +427,14 @@ main{max-width:780px;padding:12px 14px 34px}
   <h2>خلّي المنافسة تبدأ!</h2>
   <p>تابع المراحل واحسب النتائج واستمتع بكل جولة</p>
  </div>
- <div class="home-actions">
-  <button id="showArchive" class="home-tile tile-history"><span class="tile-icon">🏆</span><span class="tile-label">سجل الألعاب</span><span class="tile-arrow">‹</span></button>
-  <button id="manageRulesHome" class="home-tile tile-history" style="background:linear-gradient(145deg,#25b9d2,#0876bd)!important"><span class="tile-icon">🎴</span><span class="tile-label">إدارة الأحكام</span><span class="tile-arrow">‹</span></button>
+ 
+<div class="home-actions">
   <button id="goSetup" class="home-tile tile-new"><span class="tile-icon">▶</span><span class="tile-label">بدء لعبة جديدة</span><span class="tile-arrow">‹</span></button>
   <button id="resumeGame" class="home-tile tile-continue hidden"><span class="tile-icon">🔄</span><span class="tile-label">استكمال اللعبة</span><span class="tile-arrow">‹</span></button>
- </div>
+  <button id="showArchive" class="home-tile tile-history"><span class="tile-icon">🏆</span><span class="tile-label">سجل الألعاب</span><span class="tile-arrow">‹</span></button>
+  <button id="manageRulesHome" class="home-tile tile-history" style="background:linear-gradient(145deg,#25b9d2,#0876bd)!important"><span class="tile-icon">🎴</span><span class="tile-label">إدارة الأحكام</span><span class="tile-arrow">‹</span></button>
+</div>
+
  <div class="backup-tools">
   <button id="exportBackup" class="backup-button backup-export"><span>⤴</span> تصدير نسخة احتياطية</button>
   <button id="importBackup" class="backup-button backup-import"><span>⤓</span> استيراد نسخة احتياطية</button>
@@ -584,24 +721,103 @@ $('backHomeRules').onclick=()=>show('home');
 document.querySelectorAll('input[name="ruleMode"]').forEach(x=>x.onchange=renderManualRulePicker);
 
 /* تجهيز خانات الأسماء */
+
 function renderNames(){
  const names=read(NAMES_KEY,[]);
  const box=$('nameFields');
  const oldValues=[...box.querySelectorAll('input[data-name]')].map(x=>x.value);
  const oldCharacters=[...box.querySelectorAll('select[data-character]')].map(x=>x.value);
  const count=Number($('playerCount').value);
- const characterOptions=[['lion','🦁 الأسد'],['rabbit','🐰 الأرنب'],['bear','🧸 الدبدوب'],['panda','🐼 الباندا'],['fox','🦊 الثعلب'],['tiger','🐯 النمر']];
- box.innerHTML='';$('startGame').disabled=!count;
+
+ const characterOptions=[
+ ['lion','🦁 الأسد'],
+ ['rabbit','🐰 الأرنب'],
+ ['bear','🧸 الدبدوب'],
+ ['panda','🐼 الباندا'],
+ ['fox','🦊 الثعلب'],
+ ['tiger','🐯 النمر'],
+ ['cat','🐱 القطة'],
+ ['turtle','🐢 السلحفاة'],
+ ['deer','🦌 الغزال'],
+ ['cheetah','🐆 الفهد']
+];
+
+ box.innerHTML='';
+ $('startGame').disabled=!count;
  if(!count)return;
+
  for(let i=0;i<count;i++){
-  const d=document.createElement('div');d.className='player-input';
-  d.innerHTML=`<label>اسم اللاعب ${i+1}</label><input maxlength="24" placeholder="اسم اللاعب" list="knownNames" data-name="${i}" autocomplete="off"><select data-character="${i}" aria-label="شخصية اللاعب ${i+1}" style="width:100%;margin-top:5px;padding:9px;border:1px solid #d5e0da;border-radius:10px;background:#fff;font:inherit">${characterOptions.map(c=>`<option value="${c[0]}">${c[1]}</option>`).join('')}</select>`;
-  d.querySelector('input').value=oldValues[i]||'';
-  d.querySelector('select').value=oldCharacters[i]||characterOptions[i%characterOptions.length][0];
+  const d=document.createElement('div');
+  d.className='player-input';
+
+  d.innerHTML=`
+   <label>اسم اللاعب ${i+1}</label>
+   <div class="name-input-wrap" style="position:relative">
+    <input maxlength="24"
+     placeholder="اسم اللاعب"
+     data-name="${i}"
+     autocomplete="off"
+     data-name-input="${i}">
+    <div class="name-suggestions"
+     data-suggestions="${i}"
+     style="display:none;position:absolute;top:100%;right:0;left:0;z-index:50;background:#fff;border:1px solid #d5e0da;border-radius:10px;box-shadow:0 5px 15px #0002;max-height:180px;overflow-y:auto">
+    </div>
+   </div>
+   <select data-character="${i}" aria-label="شخصية اللاعب ${i+1}"
+    style="width:100%;margin-top:5px;padding:9px;border:1px solid #d5e0da;border-radius:10px;background:#fff;font:inherit">
+    ${characterOptions.map(c=>`<option value="${c[0]}">${c[1]}</option>`).join('')}
+   </select>
+  `;
+
+  const input=d.querySelector('input');
+  const suggestions=d.querySelector('[data-suggestions]');
+  const character=d.querySelector('select');
+
+  input.value=oldValues[i]||'';
+  character.value=oldCharacters[i]||characterOptions[i%characterOptions.length][0];
+
+  function renderSuggestions(){
+   const query=input.value.trim().toLowerCase();
+   const matches=names.filter(n=>
+    n.toLowerCase().includes(query)&&n!==input.value.trim()
+   );
+
+   suggestions.innerHTML='';
+
+   if(!matches.length){
+    suggestions.style.display='none';
+    return;
+   }
+
+   matches.forEach(name=>{
+    const item=document.createElement('button');
+    item.type='button';
+    item.textContent=name;
+    item.style.cssText='display:block;width:100%;padding:11px 12px;text-align:right;border:0;border-bottom:1px solid #eee;background:#fff;font:inherit;color:#26352d;cursor:pointer';
+
+    item.addEventListener('pointerdown',e=>{
+     e.preventDefault();
+     input.value=name;
+     suggestions.style.display='none';
+     input.dispatchEvent(new Event('input',{bubbles:true}));
+    });
+
+    suggestions.append(item);
+   });
+
+   suggestions.style.display='block';
+  }
+
+  input.addEventListener('input',renderSuggestions);
+  input.addEventListener('focus',renderSuggestions);
+  input.addEventListener('blur',()=>{
+   setTimeout(()=>suggestions.style.display='none',180);
+  });
+
   box.append(d);
  }
- const dl=document.createElement('datalist');dl.id='knownNames';dl.innerHTML=names.map(n=>`<option value="${esc(n)}">`).join('');box.append(dl);
 }
+
 
 /* حفظ الأسماء السابقة للاقتراح */
 function rememberNames(names){
@@ -611,7 +827,18 @@ function rememberNames(names){
 }
 
 /* شخصيات المضمار وتسجيل النقاط من البطاقات */
-const raceCharacters={lion:{emoji:'🦁',name:'الأسد'},rabbit:{emoji:'🐰',name:'الأرنب'},bear:{emoji:'🧸',name:'الدبدوب'},panda:{emoji:'🐼',name:'الباندا'},fox:{emoji:'🦊',name:'الثعلب'},tiger:{emoji:'🐯',name:'النمر'}};
+const raceCharacters={
+ lion:{emoji:'🦁',name:'الأسد'},
+ rabbit:{emoji:'🐰',name:'الأرنب'},
+ bear:{emoji:'🧸',name:'الدبدوب'},
+ panda:{emoji:'🐼',name:'الباندا'},
+ fox:{emoji:'🦊',name:'الثعلب'},
+ tiger:{emoji:'🐯',name:'النمر'},
+ cat:{emoji:'🐱',name:'القطة'},
+ turtle:{emoji:'🐢',name:'السلحفاة'},
+ deer:{emoji:'🦌',name:'الغزال'},
+ cheetah:{emoji:'🐆',name:'الفهد'}
+};
 const raceColors=['#087fe2','#21a85b','#ef6a27','#8751d5','#e44c83','#0b9fa7'];
 let pendingScores={};
 let trackModalPlayerId=null;
@@ -663,12 +890,50 @@ $('raceTrack').style.setProperty('--player-count',total);
   <small>${rule?esc(rule.name):'بدون حكم'}</small>
  </div>`;
 }).join('');
- const lanes=all.map((p,i)=>{
+ 
+
+const lanes=all.map((p,i)=>{
   const ch=raceCharacters[p.character]||raceCharacters.bear;
   const top=6+((10-p.phase)/9)*88;
   const color=raceColors[i%raceColors.length];
-  return `<div class="race-lane" style="--lane-color:${color}"><button class="race-token ${p.completed?'is-done':''}" data-race-player="${p.id}" style="top:${top}%" ${p.completed?'disabled':''} title="${esc(p.name)} - Phase ${p.phase}"><span class="race-token-face">${ch.emoji}</span><span class="race-token-tag">${p.completed?'🏆':`${esc(p.name)} · ${playerRoundsPlayed(p.id)} ج`}</span></button></div>`;
- }).join('');
+  const totalScore=state.rounds.reduce((sum,r)=>sum+(r.scores[p.id]??0),0);
+
+  if(p.phase===10){
+   return `
+    <div class="race-lane" style="--lane-color:${color}">
+     <button class="race-token race-token-combined ${p.completed?'is-done':''}"
+      data-race-player="${p.id}"
+      style="top:8%"
+      ${p.completed?'disabled':''}
+      title="${esc(p.name)} - Phase ${p.phase}">
+      <span class="race-token-combo">
+       <strong>${totalScore}</strong>
+       <small>نقطة</small>
+       <span class="race-token-face">${ch.emoji}</span>
+      </span>
+      <span class="race-token-tag">${p.completed?'🏆':`${esc(p.name)} · ${playerRoundsPlayed(p.id)} ج`}</span>
+     </button>
+    </div>`;
+  }
+
+  return `
+   <div class="race-lane" style="--lane-color:${color}">
+    <div class="race-lane-score">
+     <strong>${totalScore}</strong>
+     <small>نقطة</small>
+    </div>
+    <button class="race-token ${p.completed?'is-done':''}"
+     data-race-player="${p.id}"
+     style="top:${top}%"
+     ${p.completed?'disabled':''}
+     title="${esc(p.name)} - Phase ${p.phase}">
+     <span class="race-token-face">${ch.emoji}</span>
+     <span class="race-token-tag">${p.completed?'🏆':`${esc(p.name)} · ${playerRoundsPlayed(p.id)} ج`}</span>
+    </button>
+   </div>`;
+}).join('');
+
+
  const cards=all.map((p,i)=>{
   const ch=raceCharacters[p.character]||raceCharacters.bear;
   const color=raceColors[i%raceColors.length];
@@ -877,14 +1142,50 @@ $('startGame').onclick=()=>{
   }
  }
 
- // الوضع التلقائي: يحتاج إلى 10 أحكام على الأقل
- else if(mode==='auto'){
-  if(rules.length<10){
-   showConfirm('أحكام غير كافية',`تحتاج إلى 10 أحكام على الأقل لبدء اللعبة. الموجود حاليًا: ${rules.length}. افتح إدارة الأحكام وأضف المزيد.`,()=>{});
+ 
+// الوضع التلقائي: اختيار حكمين من كل مستوى بالتدريج
+else if(mode==='auto'){
+ const requiredLevels=[
+  'سهل',
+  'متوسط',
+  'فوق المتوسط',
+  'صعب',
+  'صعب جدًا'
+ ];
+
+ const usedNames=new Set();
+ selectedRules=[];
+
+ for(const level of requiredLevels){
+  const pool=rules.filter(r=>
+   r.level===level &&
+   !usedNames.has(String(r.name).trim().toLowerCase())
+  );
+
+  // خلط الأحكام عشوائيًا
+  for(let i=pool.length-1;i>0;i--){
+   const j=Math.floor(Math.random()*(i+1));
+   [pool[i],pool[j]]=[pool[j],pool[i]];
+  }
+
+  if(pool.length<2){
+   showConfirm(
+    'أحكام غير كافية',
+    `مستوى "${level}" يحتاج إلى حكمين مختلفين على الأقل. افتح إدارة الأحكام وأضف أحكامًا لهذا المستوى.`,
+    ()=>{}
+   );
    return;
   }
-  selectedRules=[...rules].sort(()=>Math.random()-.5).slice(0,10);
+
+  const chosen=pool.slice(0,2);
+
+  chosen.forEach(rule=>{
+   selectedRules.push(rule);
+   usedNames.add(String(rule.name).trim().toLowerCase());
+  });
  }
+}
+
 
  // وضع اللعب بدون أحكام: لا يحتاج إلى أي حكم
  else if(mode==='none'){
